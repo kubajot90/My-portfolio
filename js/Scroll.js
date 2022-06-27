@@ -3,33 +3,55 @@ export class Scroll {
     this.section1 = null;
     this.section2 = null;
     this.section3 = null;
+    this.sections = null;
+
+    this.currentSectionIndex = 0;
+    this.isScroll = false;
   }
 
   init() {
     this.handleElements();
     this.addListeners();
-
-    this.section1.scrollIntoView();
-
-    window.addEventListener("scroll", () => {
-      this.moveScrollto();
-    });
+    this.sectionOnView(this.currentSectionIndex);
   }
 
   handleElements() {
-    this.section1 = document.querySelector("#red");
-    this.section2 = document.querySelector("#blue");
-    this.section3 = document.querySelector("#green");
+    this.sections = document.querySelectorAll(".section");
   }
 
-  addListeners() {}
-
-  refreshBrowserOnTop() {
-    this.section1.scrollIntoView();
+  addListeners() {
+    document.addEventListener("wheel", (e) => {
+      this.setCurrentSectionIndex(e);
+      console.log(this.sections);
+    });
   }
 
-  moveScrollto() {
-    console.log("dziala");
-    this.section3.scrollIntoView({ behavior: "smooth" });
+  setCurrentSectionIndex(e) {
+    const lengthOfSections = document.querySelectorAll(".section").length;
+
+    if (!this.isScroll) {
+      this.checkIsScroll();
+      e.wheelDelta > 0
+        ? this.currentSectionIndex--
+        : this.currentSectionIndex++;
+    }
+
+    if (this.currentSectionIndex <= 0) {
+      this.currentSectionIndex = 0;
+    } else if (this.currentSectionIndex >= lengthOfSections - 1) {
+      this.currentSectionIndex = lengthOfSections - 1;
+    }
+    this.sectionOnView(this.currentSectionIndex);
+  }
+
+  checkIsScroll() {
+    this.isScroll = true;
+    setTimeout(() => {
+      this.isScroll = false;
+    }, 1000);
+  }
+
+  sectionOnView(indexOfSection) {
+    this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
   }
 }
