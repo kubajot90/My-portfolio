@@ -13,7 +13,7 @@ html {
 }
 
 .section__red {
-    background-color: red;
+    background-color: #1d1d1d;
 }
 
 .section__blue {
@@ -24,3 +24,108 @@ html {
     background-color: green;
 }
 
+.moon {
+    position: relative;
+    /* top: 40%;
+    left: 50%; */
+    /* width: 200px;
+    height: 200px; */
+    top: 10%;
+    left: 55%;
+    width: 85vh;
+    height: 85vh;
+    border-radius: 50%;
+    background-color: rgb(200, 200, 200);
+    overflow: hidden;
+    transform: rotate(15deg);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
+    
+}
+
+.moon-shade {
+    display: block;
+   position: absolute;
+   /* width: 340px;
+   height: 340px;
+   top: -18%;
+   left: -15%; */
+   width: 85vh;
+   height: 85vh;
+}
+.moon-shade svg {
+    position: absolute;
+    top: -19%;
+    left: -18%;
+ /* height:265px;
+ width: 265px; */
+ height: 115vh;
+ width: 115vh;
+
+ opacity: 0.7;
+}
+
+
+.hole-big {
+    position: absolute;
+    top: 40%;
+    left: -14%;
+    /* width: 50px;
+    height: 50px; */
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    background-color: rgb(165, 165, 165);
+    animation: bigHoleAnimation linear infinite 15s;
+   
+   
+ 
+}
+
+.hole-small {
+    position: absolute;
+    top: 70%;
+    left: 1%;
+    /* width: 25px;
+    height: 25px; */
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    background-color: rgb(165, 165, 165);
+    animation: smallHoleAnimation linear infinite 15s .3s;
+    transform: translateX(745%) scale(.4) rotateY(60deg) skew(-35deg,0);
+ 
+}
+
+@keyframes bigHoleAnimation {
+   0%{
+    transform: scale(.3) rotateY(-50deg) skew(4deg,0);
+   }
+   40%{
+    transform: scale(1) translateX(222.5%)  rotateY(0deg) skew(0,0);
+   }
+   80% {
+    transform: translateX(445%) scale(.4) rotateY(60deg) skew(-4deg,0);
+ 
+   } 
+
+   100% {
+    transform: translateX(445%) scale(.4) rotateY(60deg) skew(-4deg,0);
+   }
+}
+
+@keyframes smallHoleAnimation {
+    0%{
+        transform: scale(.3) rotateY(-50deg) skew(22deg,0);
+    }
+    40%{
+        transform: scale(1) translateX(372.5%)  rotateY(0deg) skew(0,0);
+    }
+    80% {
+        transform: translateX(745%) scale(.4) rotateY(50deg) skew(-25deg,0);
+  
+    } 
+    100% {
+        transform: translateX(745%) scale(.4) rotateY(50deg) skew(-25deg,0);
+  
+    } 
+ }
