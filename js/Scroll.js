@@ -1,10 +1,6 @@
 export class Scroll {
   constructor() {
-    this.section1 = null;
-    this.section2 = null;
-    this.section3 = null;
     this.sections = null;
-
     this.currentSectionIndex = 0;
     this.isScroll = false;
   }
@@ -20,10 +16,12 @@ export class Scroll {
   }
 
   addListeners() {
-    document.addEventListener("wheel", (e) => {
-      this.setCurrentSectionIndex(e);
-      console.log(this.sections);
-    });
+    document.addEventListener("wheel", (e) => this.setCurrentSectionIndex(e));
+
+    document.addEventListener("touchstart", (e) => console.log(e));
+    document.addEventListener("touchmove", (e) =>
+      console.log(e.touches[0].clientY)
+    );
   }
 
   setCurrentSectionIndex(e) {
