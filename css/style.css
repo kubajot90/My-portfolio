@@ -17,6 +17,7 @@ html {
 body {
     background-image: linear-gradient(#072142,#000000 60% );
     /* background-color: #072142; */
+    /* background-image: linear-gradient(to bottom, #072142, #061c37, #07182b, #061220, #020b16); */
 }
 
 .background__circles  {
@@ -223,46 +224,51 @@ body {
 
 }
 
-.section__header .clouds {
+.section__header .clouds__container {
     position: absolute;
     width: 100%;
     height: 100%;
 
 }
 
-.section__header .cloud {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-.section__header .cloud svg {
+
+.section__header .cloud__vector {
     position: absolute; 
     top: 0;
     left: 0;
-width: 40%;
-height: 40%;
+    width: 30%;
+    height: 30%;
 }
 
-.section__header .cloud:nth-child(1){
-    top: 50%;
-    left: 50%;
+.section__header .cloud__vector:nth-child(1){
+    top: -3%;
+    left: 76%;
 }
 
-.section__header .cloud:nth-child(2){
-    top: 30%;
-    left: 30%;
+.section__header .cloud__vector:nth-child(2){
+    left: 43%;
+    top:8%;
+    transform: rotateY(180deg);
 }
 
-.section__header .cloud svg:nth-child(3){
-
+.section__header .cloud__vector:nth-child(3){
+    left: 83%;
+    top:38%;
+    transform: rotateX(180deg);
+    z-index: 2;
 }
 
-.section__header .cloud svg:nth-child(4){
-
+.section__header .cloud__vector:nth-child(4){
+    left: 42%;
+    top:62%;
+    z-index: 2;
 }
 
-.section__header .cloud svg:nth-child(5){
-
+.section__header .cloud__vector:nth-child(5){
+    left: 74%;
+    top:77%;
+    transform: rotateX(180deg);
+     z-index: 2;
 }
 
 
@@ -307,7 +313,7 @@ height: 40%;
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
     }
     50% {
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.679);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.679);
     }
     100% {
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
