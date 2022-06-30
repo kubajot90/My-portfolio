@@ -7,6 +7,7 @@ export class Scroll {
 
     this.touchStart = null;
     this.scrollDirection = null;
+    this.isTouch = false;
   }
 
   init() {
@@ -26,10 +27,10 @@ export class Scroll {
       this.isWheel = false;
     });
 
-    document.addEventListener(
-      "touchstart",
-      (e) => (this.touchStart = e.touches[0].clientY)
-    );
+    document.addEventListener("touchstart", (e) => {
+      this.isTouch = true;
+      this.touchStart = e.touches[0].clientY;
+    });
     document.addEventListener("touchmove", (e) => this.checkTouch(e));
   }
 
@@ -39,7 +40,6 @@ export class Scroll {
     this.isWheel
       ? (this.scrollDirection = e.wheelDelta)
       : (this.scrollDirection = this.scrollDirection);
-    // this.scrollDirection = e.wheelDelta;
 
     if (!this.isScroll) {
       this.checkIsScroll();
@@ -53,7 +53,10 @@ export class Scroll {
     } else if (this.currentSectionIndex >= lengthOfSections - 1) {
       this.currentSectionIndex = lengthOfSections - 1;
     }
-    this.sectionOnView(this.currentSectionIndex);
+
+    this.isTouch
+      ? this.sections[this.currentSectionIndex].scrollIntoView()
+      : this.sectionOnView(this.currentSectionIndex);
     // console.log("currentsectionindex: " + this.currentSectionIndex);
   }
 
@@ -69,7 +72,6 @@ export class Scroll {
   }
 
   checkTouch(e) {
-    // e.preventDefault();
     const touchPosition = e.touches[0].clientY;
     console.log(
       "this.touchStart - touchPosition: " + (this.touchStart - touchPosition)
