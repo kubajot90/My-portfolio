@@ -20,6 +20,12 @@ body {
     /* background-image: linear-gradient(to bottom, #072142, #061c37, #07182b, #061220, #020b16); */
 }
 
+.main {
+    width: 100vw;
+    height: 100vh;
+}
+
+
 .background__circles  {
     position: fixed;
     top: 10%;
@@ -38,7 +44,7 @@ body {
     border-radius: 50%;
     background-color: rgba(255, 255, 255);
     opacity: 0.04;
-    transition: transform .25s;
+    transition: transform .15s;
    
 }
 
@@ -116,7 +122,7 @@ body {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
     animation: moonShine linear infinite 5s;
 
-    transition: transform .25s;
+    transition: transform .15s;
     
 }
 
@@ -251,7 +257,7 @@ body {
     width: 70vh;
     height: 70vh;
     z-index: 2;
-    transition: transform .25s;
+    transition: transform .15s;
 }
 
 .section__header .cloud__vector:nth-child(1){
@@ -263,11 +269,9 @@ body {
 }
 
 .section__header .cloud__vector:nth-child(2){
-    /* left: 43%;
-    top:8%;
-    transform: rotateY(180deg); */
-   top: -16%;
+    top: -16%;
     left: -38%;
+    z-index: -1;
 }
 
 .section__header .cloud__vector:nth-child(3){
