@@ -1,5 +1,6 @@
 :root {
     --mainTextColor: #ff4d5a;
+    --mainHoverOpacity: 0.3;
 }
 
 * {
@@ -16,15 +17,9 @@ html {
 
 body {
     background-image: linear-gradient(#072142,#000000 60% );
-    /* background-color: #072142; */
-    /* background-image: linear-gradient(to bottom, #072142, #061c37, #07182b, #061220, #020b16); */
 }
 
-.main {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
+
 
 
 .background__circles  {
@@ -32,8 +27,6 @@ body {
     top: 10%;
     left: 58%;
    
-  
-  
 }
 
 .background__circles .circle {
@@ -77,6 +70,50 @@ body {
 .background__circles .circle:nth-child(6) {
     transform: scale(2.8);
     /* opacity: 0.2; */
+}
+
+.main {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main__navigation {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+.main__navigation-list {
+    display: flex;
+    list-style: none;
+    margin-top: 1%;
+}
+
+.main__navigation-item {
+    padding: 15px;
+    cursor: pointer;
+    transition: opacity .3s ;
+}
+
+.main__navigation-item:hover {
+   opacity: var(--mainHoverOpacity);
+}
+
+.main__navigation-item:nth-child(1) {
+    margin: 0 auto 0 3%;
+}
+.main__navigation-item:nth-last-child(1) {
+    margin-right: 3%;
+}
+
+.main__navigation-link {
+    font-size: 1.1rem;
+    color: white;
+    text-decoration: none;
+
 }
 
 .section {
