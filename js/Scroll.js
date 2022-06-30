@@ -86,5 +86,6 @@ export class Scroll {
     this.setCurrentSectionIndex(e);
     console.log(this.scrollDirection);
     this.scrollDirection = 0;
+    this.isTouch = false;
   }
 }
