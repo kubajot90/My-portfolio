@@ -1,6 +1,10 @@
 :root {
     --mainTextColor: #ff4d5a;
     --mainHoverOpacity: 0.3;
+    /* --transformPseudoBefore:   rotate(45deg) translate3d(0%, 400%, 0); */
+    /* --transformPseudoAfter:   rotate(-45deg) translate3d(0%, -400%, 0); */
+    --transformPseudoBefore: rotate(0) translate3d(0, 0, 0);
+    --transformPseudoAfter:   rotate(0) translate3d(0, 0, 0);
 }
 
 * {
@@ -31,8 +35,6 @@ body {
 
 .background__circles .circle {
     position: absolute;
-    /* top: 10%;
-    left: 58%; */
     width: 85vh;
     height: 85vh;
     border-radius: 50%;
@@ -43,39 +45,50 @@ body {
 }
 
 .background__circles .circle:nth-child(1) {
-    transform: scale(1.3) 
-    /* opacity: 0.1; */
+    transform: scale(1.3); 
 }
 
 .background__circles .circle:nth-child(2) {
     transform: scale(1.6);
-    /* opacity: 0.2; */
 }
 
 .background__circles .circle:nth-child(3) {
     transform: scale(1.9);
-    /* opacity: 0.2; */
 }
 
 .background__circles .circle:nth-child(4) {
     transform: scale(2.2);
-    /* opacity: 0.2; */
 }
 
 .background__circles .circle:nth-child(5) {
     transform: scale(2.5);
-    /* opacity: 0.2; */
 }
 
 .background__circles .circle:nth-child(6) {
     transform: scale(2.8);
-    /* opacity: 0.2; */
 }
 
 .main {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+}
+
+.big__navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, #072142, #8c2b7a 42%, #ff4d5a);
+    z-index: 99;
+    transform: translateY(-100%);
+    transition: .4s  ease-out;
+
+}
+
+.big__navigation--slide {
+    transform: translateY(0);
 }
 
 .main__navigation {
@@ -107,9 +120,13 @@ body {
     margin: 0 auto 0 2%;
     padding: 15px 0;
 }
+
 .main__navigation-item:nth-last-child(1) {
     margin-right: 2%;
     margin-left: 2%;
+}
+.main__navigation-item:nth-last-child(1):hover {
+    opacity:1;
 }
 
 .main__navigation-link {
@@ -127,7 +144,6 @@ body {
     left: 0;
     height: 100%;
     width: 40px;
-  
 }
 
 .navigation-x-mark::before {
@@ -138,23 +154,29 @@ body {
     width: 100%;
     height: 3px;
     background-color: #fff;
+    transform: var(--transformPseudoBefore);
+    transition: .4s;
 }
 
 .navigation-x-mark::after {
     content: '';
     position: absolute;
-    top: 100%;
+    top: 80%;
     left: 0;
     width: 100%;
     height: 3px;
     background-color: #fff;
-    transform: translateY(-200%);
+    transform: var(--transformPseudoAfter);
+    transition: .4s;
+}
+
+.x-mark--rotate {
+    transform: rotate(-45deg) translate3d(0, 50%, 0);
 }
 
 .navigation__mail-container  {
     display: inline-block;
     width: 0;
-    text-shadow: 0 0 2px black;
     font-weight: 300;
     font-size: 1rem;
     margin-left: 7px;
@@ -189,8 +211,6 @@ body {
 
 .section__header {
     position: relative;
-    /* background-color: #1d1d1d; */
-    /* background-image: linear-gradient(#313131,#1d1d1d ); */
 }
 
 .section__blue {
@@ -209,12 +229,6 @@ body {
 
 .section__header .moon {
     position: relative;
-    /* top: 40%;
-    left: 50%; */
-    /* width: 200px;
-    height: 200px; */
-    /* top: 10%;
-    left: 58%; */
     top: 0;
     left: 0;
     width: 85vh;
@@ -233,10 +247,6 @@ body {
 .section__header .moon__shade {
     display: block;
    position: absolute;
-   /* width: 340px;
-   height: 340px;
-   top: -18%;
-   left: -15%; */
    width: 85vh;
    height: 85vh;
 }
@@ -247,7 +257,6 @@ body {
     height: 115vh;
     width: 115vh;
     opacity: 0.7;
-    /* animation: shadeAnimation linear 5s infinite; */
 
 }
 
@@ -256,8 +265,6 @@ body {
     position: absolute;
     top: 40%;
     left: -14%;
-    /* width: 50px;
-    height: 50px; */
     width: 20vh;
     height: 20vh;
     border-radius: 50%;
@@ -272,8 +279,6 @@ body {
     position: absolute;
     top: 70%;
     left: 1%;
-    /* width: 25px;
-    height: 25px; */
     width: 10vh;
     height: 10vh;
     border-radius: 50%;
@@ -316,14 +321,6 @@ body {
     margin-bottom: -2.3rem;
 }
 
-.section__header .header__title-h1:nth-child(2) {
-
-  
-}
-
-.section__header .header__title-h2 {
-
-}
 
 .section__header .header__title-h3 .wannabe {
     display: block;
@@ -365,11 +362,8 @@ body {
 }
 
 .section__header .cloud__vector:nth-child(1){
-    /* top: -3%;
-    left: 76%; */
     top: -48%;
     left: 31%;
-    /* transform: rotateY(180deg); */
 }
 
 .section__header .cloud__vector:nth-child(2){
@@ -379,30 +373,18 @@ body {
 }
 
 .section__header .cloud__vector:nth-child(3){
-    /* left: 83%;
-    top:38%;
-    transform: rotateX(180deg);
-    z-index: 2; */
        top: 0;
     left: 69%;
 }
 
 .section__header .cloud__vector:nth-child(4){
-    /* left: 42%;
-    top:62%;
-    z-index: 2; */
    top: 44%;
     left: -50%;
 }
 
 .section__header .cloud__vector:nth-child(5){
-    /* left: 74%;
-    top:77%;
-    transform: rotateX(180deg);
-     z-index: 2; */
     top:56%;
     left: 39%;
-    /* transform: rotateX(180deg); */
 }
 
 

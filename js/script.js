@@ -1,12 +1,12 @@
 import { Scroll } from "./Scroll.js";
 import { Paralaxa } from "./Paralaxa.js";
-import { Animation } from "./Animation.js";
+import { NavAnimation } from "./NavAnimation.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const scroll = new Scroll();
   scroll.init();
   const paralaxa = new Paralaxa();
   paralaxa.init();
-  const animation = new Animation();
-  animation.init();
+  const navAnimation = new NavAnimation();
+  navAnimation.init();
 });
