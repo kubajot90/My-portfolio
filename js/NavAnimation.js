@@ -6,10 +6,13 @@ export class NavAnimation {
     this.navPhoneContainer = null;
     this.navBig = null;
     this.navBigItems = null;
+    this.navBigLinks = null;
     this.xMark = null;
 
     this.root = null;
     this.isToggledRoot = false;
+
+    this.blackScreen = null;
   }
 
   init() {
@@ -32,6 +35,10 @@ export class NavAnimation {
     this.xMark = document.querySelector(".navigation-x-mark");
 
     this.root = document.querySelector(":root");
+
+    this.blackScreen = document.querySelector(".black__screen");
+
+    this.navBigLinks = document.querySelectorAll(".big__navigation-link");
   }
 
   addListeners() {
@@ -44,6 +51,9 @@ export class NavAnimation {
     this.xMark.addEventListener("click", () => {
       this.toggleClass(this.navBig, "big__navigation--slide");
       this.toggleRootProperty();
+      // this.toggleClass(this.blackScreen, "black__screen--show");
+      this.blackScreenShow();
+      this.navBigLinksAnimation();
     });
 
     this.navBigItems.forEach((item) =>
@@ -83,5 +93,19 @@ export class NavAnimation {
   bigNavSlide() {
     this.toggleClass(this.navBig, "big__navigation--slide");
     this.toggleRootProperty();
+    // this.toggleClass(this.blackScreen, "black__screen--show");
+    this.blackScreenShow(600);
+  }
+
+  blackScreenShow(delay = 0) {
+    setTimeout(() => {
+      this.toggleClass(this.blackScreen, "black__screen--show");
+    }, delay);
+  }
+
+  navBigLinksAnimation() {
+    this.navBigLinks.forEach((link) =>
+      this.toggleClass(link, "big__navigation-link--animation")
+    );
   }
 }
