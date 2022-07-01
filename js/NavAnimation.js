@@ -5,6 +5,7 @@ export class NavAnimation {
     this.navMailContainer = null;
     this.navPhoneContainer = null;
     this.navBig = null;
+    this.navBigItems = null;
     this.xMark = null;
 
     this.root = null;
@@ -26,26 +27,31 @@ export class NavAnimation {
       ".navigation__phone-container"
     );
     this.navBig = document.querySelector(".big__navigation");
+    this.navBigItems = document.querySelectorAll(".big__navigation-item");
+
     this.xMark = document.querySelector(".navigation-x-mark");
 
     this.root = document.querySelector(":root");
   }
 
   addListeners() {
-    this.navEmailBtn.addEventListener("click", (e) =>
-      this.toggleClass(this.navMailContainer, "slide", e)
+    this.navEmailBtn.addEventListener("click", () =>
+      this.toggleClass(this.navMailContainer, "slide")
     );
-    this.navPhoneBtn.addEventListener("click", (e) =>
-      this.toggleClass(this.navPhoneContainer, "slide", e)
+    this.navPhoneBtn.addEventListener("click", () =>
+      this.toggleClass(this.navPhoneContainer, "slide")
     );
-    this.xMark.addEventListener("click", (e) => {
-      this.toggleClass(this.navBig, "big__navigation--slide", e);
+    this.xMark.addEventListener("click", () => {
+      this.toggleClass(this.navBig, "big__navigation--slide");
       this.toggleRootProperty();
     });
+
+    this.navBigItems.forEach((item) =>
+      item.addEventListener("click", () => this.bigNavSlide())
+    );
   }
 
-  toggleClass(element, toggleClass, e) {
-    e.preventDefault();
+  toggleClass(element, toggleClass) {
     element.classList.toggle(toggleClass);
   }
 
@@ -72,5 +78,10 @@ export class NavAnimation {
 
       this.isToggledRoot = false;
     }
+  }
+
+  bigNavSlide() {
+    this.toggleClass(this.navBig, "big__navigation--slide");
+    this.toggleRootProperty();
   }
 }
