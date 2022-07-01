@@ -146,12 +146,7 @@ body {
     animation: navigation-link-anim .3s ease-in both .3s;
 }
 
-@keyframes navigation-link-anim {
-  
-   to {
-        transform: translateY(-20%);
-    }
-}
+
 
 .big__navigation-link::after {
     content: '';
@@ -410,6 +405,7 @@ body {
     left: 5%;
     transform: translateY(-50%);
     color: white;
+    overflow: hidden;
 
 }
 .section__header .header__title-h1 {
@@ -420,10 +416,14 @@ body {
 }
 
 .section__header .header__title-h1:nth-child(1) {
-   
-    letter-spacing: .13rem;
-  
-    margin-bottom: -2.3rem;
+   letter-spacing: .13rem;
+   margin-bottom: -2.3rem;
+   transform: translateX(-100%);
+    animation: transformAnimation 1s ease-out both .6s;
+}
+.section__header .header__title-h1:nth-child(2) {
+    transform: translateX(-100%);
+    animation: transformAnimation 1s ease-out both .8s;
 }
 
 
@@ -435,6 +435,8 @@ body {
     font-weight: 300;
     color: var(--mainTextColor);
     text-align: end;
+    transform: translateX(100%);
+    animation: transformAnimation 1s ease-out both 1s;
 }
 
 .section__header .red-line {
@@ -445,8 +447,20 @@ body {
     width: 67%;
     height: 0.08rem;
     background-color: var(--mainTextColor);
-
+    transform: translateX(150%);
+    animation: transformAnimation 1s ease-out both 1s;
 }
+
+.header__title--animation {}
+
+@keyframes transformAnimation {
+    100% {
+        transform: translateX(0);
+    }
+
+   
+}
+
 
 .section__header .clouds__container {
     position: absolute;
@@ -469,27 +483,37 @@ body {
 .section__header .cloud__vector:nth-child(1){
     top: -48%;
     left: 31%;
+    transform: translateX(100vw);
+    animation: transformAnimation 1s ease-out both .4s;
 }
 
 .section__header .cloud__vector:nth-child(2){
     top: -16%;
     left: -38%;
     z-index: -1;
+    transform: translateX(100vw);
+    animation: transformAnimation 1s ease-out both .4s;
 }
 
 .section__header .cloud__vector:nth-child(3){
        top: 0;
     left: 69%;
+    transform: translateX(100vw);
+    animation: transformAnimation 1s ease-out both .6s;
 }
 
 .section__header .cloud__vector:nth-child(4){
    top: 44%;
     left: -50%;
+    transform: translateX(100vw);
+    animation: transformAnimation 1s ease-out both .8s;
 }
 
 .section__header .cloud__vector:nth-child(5){
     top:56%;
     left: 39%;
+    transform: translateX(100vw);
+    animation: transformAnimation 1s ease-out both .6s;
 }
 
 
@@ -537,6 +561,13 @@ body {
     100% {
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
     }
+ }
+
+ @keyframes navigation-link-anim {
+  
+    to {
+         transform: translateY(-20%);
+     }
  }
 
  
