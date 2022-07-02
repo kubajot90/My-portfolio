@@ -599,9 +599,9 @@ body {
 
     .header__moon-container {
         /* left: 68%; */
-        left: 50%;
+        left: 20%;
         top: 10%;
-        transform: translateX(-50%);
+        /* transform: translateX(-50%); */
 
     }
     .section__header .moon {
@@ -622,7 +622,7 @@ body {
         .background__circles  {
             top: 10%;
             /* left: 68%; */
-            left: 5%;
+            left: 20%;
             /* transform: translateX(-50%); */
            }
 
@@ -640,6 +640,26 @@ body {
         
         }
 
+        @media (max-width: 576px){
+            html {
+                font-size: 13px;
+                
+            }
+        }
+
+        @media (max-width: 412px){
+            html {
+                font-size: 10px;
+                
+            }
+
+            .section__header .header__h2-portfolio {
+                top: 28%;
+                left: 50%;
+                transform: translateX(-50%);
+              
+            }
+        }
         
       
         
