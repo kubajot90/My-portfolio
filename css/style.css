@@ -336,13 +336,11 @@ body {
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
     overflow: hidden;
-    transform: rotate(15deg);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
-    animation: moonShine linear infinite 5s;
-
-    transition: transform .15s;
+    animation: moonShine linear infinite , transformAnimFromRight 1s ease-out backwards .6s, opacityAnim 1s ease-out backwards .8s;
     
-}
+    transition: transform .15s;
+    }
 
 .section__header .moon__shade {
     display: block;
@@ -397,6 +395,8 @@ body {
     text-shadow: 3px 4px 12px rgba(0, 0, 0, 0.247);
     color: var(--mainTextColor);
     font-weight: 800;
+    z-index: 99;
+    animation: transformAnimFromRight 1s ease-out backwards .4s, opacityAnim 1s ease-out backwards .8s;
 }
 
 .section__header .header__title {
@@ -406,6 +406,7 @@ body {
     transform: translateY(-50%);
     color: white;
     overflow: hidden;
+    z-index: 99;
 
 }
 .section__header .header__title-h1 {
@@ -419,11 +420,11 @@ body {
    letter-spacing: .13rem;
    margin-bottom: -2.3rem;
    transform: translateX(-100%);
-    animation: transformAnimation 1s ease-out both .6s;
+    animation: transformAnimFromLeft 1s ease-out both .6s;
 }
 .section__header .header__title-h1:nth-child(2) {
     transform: translateX(-100%);
-    animation: transformAnimation 1s ease-out both .8s;
+    animation: transformAnimFromLeft 1s ease-out both .8s;
 }
 
 
@@ -436,7 +437,7 @@ body {
     color: var(--mainTextColor);
     text-align: end;
     transform: translateX(100%);
-    animation: transformAnimation 1s ease-out both 1s;
+    animation: transformAnimFromLeft 1s ease-out both 1s;
 }
 
 .section__header .red-line {
@@ -448,18 +449,9 @@ body {
     height: 0.08rem;
     background-color: var(--mainTextColor);
     transform: translateX(150%);
-    animation: transformAnimation 1s ease-out both 1s;
+    animation: transformAnimFromLeft 1s ease-out both 1s;
 }
 
-.header__title--animation {}
-
-@keyframes transformAnimation {
-    100% {
-        transform: translateX(0);
-    }
-
-   
-}
 
 
 .section__header .clouds__container {
@@ -477,43 +469,40 @@ body {
     width: 70vh;
     height: 70vh;
     z-index: 2;
+    opacity: 1;
     transition: transform .15s;
 }
 
 .section__header .cloud__vector:nth-child(1){
     top: -48%;
     left: 31%;
-    transform: translateX(100vw);
-    animation: transformAnimation 1s ease-out both .4s;
+    animation: transformAnimFromRight 1s ease-out backwards .4s, opacityAnim 1s ease-out backwards .8s;
 }
 
 .section__header .cloud__vector:nth-child(2){
     top: -16%;
     left: -38%;
     z-index: -1;
-    transform: translateX(100vw);
-    animation: transformAnimation 1s ease-out both .4s;
+    animation: transformAnimFromRight 1s ease-out backwards .4s, opacityAnim 1s ease-out backwards .8s;
 }
 
 .section__header .cloud__vector:nth-child(3){
-       top: 0;
+    top: 0;
     left: 69%;
-    transform: translateX(100vw);
-    animation: transformAnimation 1s ease-out both .6s;
+    animation: transformAnimFromRight 1s ease-out backwards .6s, opacityAnim 1s ease-out backwards .8s;
 }
 
 .section__header .cloud__vector:nth-child(4){
    top: 44%;
-    left: -50%;
-    transform: translateX(100vw);
-    animation: transformAnimation 1s ease-out both .8s;
+    left: -45%;
+    animation: transformAnimFromRight 1s ease-out backwards .8s, opacityAnim 1s ease-out backwards .8s;
 }
 
 .section__header .cloud__vector:nth-child(5){
     top:56%;
-    left: 39%;
-    transform: translateX(100vw);
-    animation: transformAnimation 1s ease-out both .6s;
+    left: 47%;
+    animation: transformAnimFromRight 1s ease-out backwards .6s, opacityAnim 1s ease-out backwards .8s;
+   
 }
 
 
@@ -570,4 +559,90 @@ body {
      }
  }
 
+ @keyframes opacityAnim {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1
+    }
+    
+ }
+
+ @keyframes transformAnimFromRight {
+    from {
+        transform: translateX(100vw);
+        
+    }
+    to{
+        transform: translateX(0);
+    }
+   
+}
+
+ @keyframes transformAnimFromLeft {
+    from {
+        transform: translateX(-100vw);
+    }
+    to{
+        transform: translateX(0);
+        
+    }
+   
+}
  
+@media (max-width: 768px) {
+    html {
+        font-size: 20px;
+        
+    }
+
+    .header__moon-container {
+        /* left: 68%; */
+        left: 50%;
+        top: 10%;
+        transform: translateX(-50%);
+
+    }
+    .section__header .moon {
+        width: 45vh;
+        height: 45vh;
+        }
+
+    .section__header .cloud__vector {
+        width: 40vh;
+        height: 40vh;
+        }
+
+        .background__circles .circle {
+            width: 45vh;
+            height: 45vh;   
+        }
+
+        .background__circles  {
+            top: 10%;
+            /* left: 68%; */
+            left: 5%;
+            /* transform: translateX(-50%); */
+           }
+
+           .section__header .header__h2-portfolio {
+            top: 28%;
+            left: 20%;
+          
+        }
+
+        .section__header .header__title {
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+           
+        
+        }
+
+        
+      
+        
+      
+        
+}
