@@ -9,7 +9,5 @@ document.addEventListener("DOMContentLoaded", () => {
   paralaxa.init();
   const navAnimation = new NavAnimation();
   navAnimation.init();
-
-  // navAnimation.toggleClass(navAnimation.blackScreen, "black__screen--show");
   navAnimation.blackScreenShow(500);
 });

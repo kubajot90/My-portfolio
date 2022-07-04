@@ -51,7 +51,6 @@ export class NavAnimation {
     this.xMark.addEventListener("click", () => {
       this.toggleClass(this.navBig, "big__navigation--slide");
       this.toggleRootProperty();
-      // this.toggleClass(this.blackScreen, "black__screen--show");
       this.blackScreenShow();
       this.navBigLinksAnimation();
     });
@@ -93,8 +92,8 @@ export class NavAnimation {
   bigNavSlide() {
     this.toggleClass(this.navBig, "big__navigation--slide");
     this.toggleRootProperty();
-    // this.toggleClass(this.blackScreen, "black__screen--show");
     this.blackScreenShow(600);
+    this.navBigLinksAnimation();
   }
 
   blackScreenShow(delay = 0) {

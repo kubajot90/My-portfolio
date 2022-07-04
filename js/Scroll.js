@@ -40,6 +40,11 @@ export class Scroll {
       this.touchStart = e.touches[0].clientY;
     });
     document.addEventListener("touchmove", (e) => this.checkTouch(e));
+
+    window.addEventListener("hashchange", () => {
+      this.changeCurrentSectionIndexByNav();
+      this.homePageAnimation();
+    });
   }
 
   setCurrentSectionIndex(e) {
@@ -65,7 +70,6 @@ export class Scroll {
     this.isTouch
       ? this.sections[this.currentSectionIndex].scrollIntoView()
       : this.sectionOnView(this.currentSectionIndex);
-    // console.log("currentsectionindex: " + this.currentSectionIndex);
   }
 
   checkIsScroll() {
@@ -76,8 +80,9 @@ export class Scroll {
   }
 
   sectionOnView(indexOfSection) {
-    this.scrollAnimation(this.headerTitles, "reverseTransformFromLeft");
-    this.scrollAnimation(this.clouds, "reverseTransformAnimFromRight");
+    this.homePageAnimation();
+    // this.scrollAnimation(this.headerTitles, "reverseTransformFromLeft");
+    // this.scrollAnimation(this.clouds, "reverseTransformAnimFromRight");
     setTimeout(() => {
       this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
     }, 200);
@@ -94,14 +99,34 @@ export class Scroll {
       : (this.scrollDirection = 1);
 
     this.setCurrentSectionIndex(e);
-    console.log(this.scrollDirection);
     this.scrollDirection = 0;
     this.isTouch = false;
   }
 
-  scrollAnimation(elements, toggleClass) {
-    elements.forEach((element) => {
-      element.classList.toggle(toggleClass);
+  homePageAnimation() {
+    if (this.currentSectionIndex !== 0) {
+      this.headerTitles.forEach((elm) =>
+        elm.classList.add("reverseTransformFromLeft")
+      );
+      this.clouds.forEach((elm) =>
+        elm.classList.add("reverseTransformAnimFromRight")
+      );
+    } else if (this.currentSectionIndex === 0) {
+      this.headerTitles.forEach((elm) =>
+        elm.classList.remove("reverseTransformFromLeft")
+      );
+      this.clouds.forEach((elm) =>
+        elm.classList.remove("reverseTransformAnimFromRight")
+      );
+    }
+  }
+
+  changeCurrentSectionIndexByNav() {
+    this.sections.forEach((section, index) => {
+      if (section.getBoundingClientRect().y === 0) {
+        this.currentSectionIndex = index;
+      }
     });
+    console.log(this.currentSectionIndex);
   }
 }
