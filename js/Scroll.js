@@ -8,16 +8,24 @@ export class Scroll {
     this.touchStart = null;
     this.scrollDirection = null;
     this.isTouch = false;
+
+    this.headerTitles = null;
+    this.clouds = null;
   }
 
   init() {
     this.handleElements();
     this.addListeners();
-    this.sectionOnView(this.currentSectionIndex);
+    this.sections[0].scrollIntoView({ behavior: "smooth" });
+    // this.sectionOnView(this.currentSectionIndex);
   }
 
   handleElements() {
     this.sections = document.querySelectorAll(".section");
+    this.headerTitles = document.querySelectorAll(
+      "[data-header-Animation-from-left]"
+    );
+    this.clouds = document.querySelectorAll(".header-Animation-from-right");
   }
 
   addListeners() {
@@ -68,7 +76,11 @@ export class Scroll {
   }
 
   sectionOnView(indexOfSection) {
-    this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
+    this.scrollAnimation(this.headerTitles, "reverseTransformFromLeft");
+    this.scrollAnimation(this.clouds, "reverseTransformAnimFromRight");
+    setTimeout(() => {
+      this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
+    }, 200);
   }
 
   checkTouch(e) {
@@ -76,9 +88,7 @@ export class Scroll {
     console.log(
       "this.touchStart - touchPosition: " + (this.touchStart - touchPosition)
     );
-    // console.log(" touchPosition: " + touchPosition);
-    // console.log("tochstart: " + this.touchStart);
-    // console.log("touch position: " + touchPosition);
+
     this.touchStart - touchPosition > 0
       ? (this.scrollDirection = -1)
       : (this.scrollDirection = 1);
@@ -87,5 +97,11 @@ export class Scroll {
     console.log(this.scrollDirection);
     this.scrollDirection = 0;
     this.isTouch = false;
+  }
+
+  scrollAnimation(elements, toggleClass) {
+    elements.forEach((element) => {
+      element.classList.toggle(toggleClass);
+    });
   }
 }
