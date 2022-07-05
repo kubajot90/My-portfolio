@@ -44,6 +44,7 @@ export class Scroll {
     window.addEventListener("hashchange", () => {
       this.changeCurrentSectionIndexByNav();
       this.homePageAnimation();
+      this.sectionsAnimations();
     });
   }
 
@@ -70,6 +71,8 @@ export class Scroll {
     this.isTouch
       ? this.sections[this.currentSectionIndex].scrollIntoView()
       : this.sectionOnView(this.currentSectionIndex);
+
+    this.sectionsAnimations();
   }
 
   checkIsScroll() {
@@ -81,8 +84,6 @@ export class Scroll {
 
   sectionOnView(indexOfSection) {
     this.homePageAnimation();
-    // this.scrollAnimation(this.headerTitles, "reverseTransformFromLeft");
-    // this.scrollAnimation(this.clouds, "reverseTransformAnimFromRight");
     setTimeout(() => {
       this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
     }, 200);
@@ -90,9 +91,6 @@ export class Scroll {
 
   checkTouch(e) {
     const touchPosition = e.touches[0].clientY;
-    console.log(
-      "this.touchStart - touchPosition: " + (this.touchStart - touchPosition)
-    );
 
     this.touchStart - touchPosition > 0
       ? (this.scrollDirection = -1)
@@ -121,12 +119,37 @@ export class Scroll {
     }
   }
 
+  sectionsAnimations() {
+    // this.clearAnimationClass("transformAnimFromLeft");
+
+    const elements = document.querySelectorAll(
+      `[data-section-${this.currentSectionIndex}]`
+    );
+
+    elements.forEach((element) =>
+      element.classList.add("transformAnimSections")
+    );
+    this.removeAnimationClass();
+  }
+
+  removeAnimationClass() {
+    const elements = document.querySelectorAll(
+      `[data-section-${this.currentSectionIndex - 1}],[data-section-${
+        this.currentSectionIndex + 1
+      }]`
+    );
+    setTimeout(() => {
+      elements.forEach((element) =>
+        element.classList.remove("transformAnimSections")
+      );
+    }, 500);
+  }
+
   changeCurrentSectionIndexByNav() {
     this.sections.forEach((section, index) => {
       if (section.getBoundingClientRect().y === 0) {
         this.currentSectionIndex = index;
       }
     });
-    console.log(this.currentSectionIndex);
   }
 }
