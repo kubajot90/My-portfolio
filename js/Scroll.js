@@ -80,9 +80,14 @@ export class Scroll {
   }
 
   sectionOnView(indexOfSection) {
+<<<<<<< HEAD
     this.homePageAnimation();
     // this.scrollAnimation(this.headerTitles, "reverseTransformFromLeft");
     // this.scrollAnimation(this.clouds, "reverseTransformAnimFromRight");
+=======
+    this.scrollAnimation(this.headerTitles, "reverseTransformFromLeft");
+    this.scrollAnimation(this.clouds, "reverseTransformAnimFromRight");
+>>>>>>> 88a62eb36b8994f50f9fe0687744ca76184a1bc6
     setTimeout(() => {
       this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
     }, 200);
@@ -103,6 +108,7 @@ export class Scroll {
     this.isTouch = false;
   }
 
+<<<<<<< HEAD
   homePageAnimation() {
     if (this.currentSectionIndex !== 0) {
       this.headerTitles.forEach((elm) =>
@@ -128,5 +134,11 @@ export class Scroll {
       }
     });
     console.log(this.currentSectionIndex);
+=======
+  scrollAnimation(elements, toggleClass) {
+    elements.forEach((element) => {
+      element.classList.toggle(toggleClass);
+    });
+>>>>>>> 88a62eb36b8994f50f9fe0687744ca76184a1bc6
   }
 }
