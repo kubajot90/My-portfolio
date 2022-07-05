@@ -223,12 +223,7 @@ body {
     height: 100%;
     color: white;
     text-decoration: none;
-  
-
-}
-
-
-
+  }
 
 .navigation-x-mark {
     position:relative;
@@ -304,6 +299,7 @@ body {
 
 
 .section {
+    position: relative;
     height: 100vh;
     width: 100vw;
 }
@@ -396,7 +392,7 @@ body {
     animation: transformAnimFromRight 1s ease-out backwards .4s, opacityAnim 1s ease-out backwards .8s;
 }
 
-.section__header .header__title {
+ .header__title {
     position: absolute;
     top: 50%;
     left: 5%;
@@ -406,14 +402,14 @@ body {
     z-index: 7;
 
 }
-.section__header .header__title-h1 {
+ .header__title-h1 {
     font-size: 4rem;
     font-weight: 600;
     text-align: end;
     text-shadow: 0 0 10px #00000082;
 }
 
-.section__header .header__title-h1:nth-child(1) {
+ .header__title-h1:nth-child(1) {
    letter-spacing: .13rem;
    margin-bottom: -2.3rem;
    transform: translateX(-100%);
@@ -424,13 +420,13 @@ body {
     animation: reverseTransformFromLeft 2s ease-out  both  !important;
 }
 
-.section__header .header__title-h1:nth-child(2) {
+ .header__title-h1:nth-child(2) {
     transform: translateX(-100%);
     animation: transformAnimFromLeft 1s ease-out both .8s;
 }
 
 
-.section__header .header__title-h3 .wannabe {
+ .header__title-h3 .wannabe {
     display: block;
     margin-top: -1.6rem;
     padding-right: 0.08rem;
@@ -442,7 +438,7 @@ body {
     animation: transformAnimFromLeft 1s ease-out both 1s;
 }
 
-.section__header .red-line {
+ .red-line {
     display: block;
     position: absolute;
     bottom: 13%;
@@ -512,6 +508,105 @@ body {
     animation: reverseTransformAnimFromRight 1s ease-out forwards, reverseOpacityAnim 1s ease-out forwards !important;
 }
 
+.section__container {
+    /* position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    color: white; */
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.title-box {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    color: white;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.title-h1 {
+    letter-spacing: .13rem;
+    /* margin-bottom: -2.3rem; */
+    margin-bottom: -1.5rem;
+    font-size: 6rem;
+    font-weight: 600;
+    text-align: end;
+    text-shadow: 0 0 10px #00000082;
+}
+.red-line-box {
+    /* position: absolute; */
+    position: relative;
+    /* width: 100%; */
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.title-red-line {
+    /* display: inline-block; */
+    /* position: absolute; */
+    transform: translateY(1300%);
+    bottom: 50%;
+    left: 0;
+    /* width: 55%; */
+    flex-grow: 1;
+    height: 0.06rem;
+    background-color: var(--mainTextColor);
+}
+
+.title-red-line-text {
+    /* position: absolute; */
+    /* display: inline-block; */
+    /* margin-top: -1.6rem; */
+    padding-right: 0.08rem;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--mainTextColor);
+    /* text-align: end; */
+}
+
+.title-button {
+    /* position: absolute; */
+    /* display: block; */
+    /* top: 100%; */
+    width: 40%;
+    margin-top: 5px;
+    margin-left: 5%;
+    padding: 7px 0;
+    color: white;
+    background-color: var(--mainTextColor);
+    border: none;
+    border-radius: 20px;
+    font-family: 'Poppins';
+    transition: .2s ease-in;
+}
+
+.title-button:hover {
+    transform: translateY(-8%);
+}
+
+.image-box {
+    position: relative;
+    width: 100%;
+    /* height: auto; */
+  /* background-color: red; */
+}
+
+.about-me__image {
+    position: absolute;
+    /* width: 100%; */
+    height: 100%;
+    background-image: url('../image/moon-min-3.jpg');
+    background-position: center;
+    background-size: cover;
+    
+}
 
 
 
@@ -547,17 +642,7 @@ body {
     } 
  }
   
- /* @keyframes moonShine {
-    10% {
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
-    }
-    50% {
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.679);
-    }
-    100% {
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
-    }
- } */
+
 
  @keyframes navigation-link-anim {
   
