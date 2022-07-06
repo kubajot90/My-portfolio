@@ -332,7 +332,8 @@ body {
     overflow: hidden;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.679);
     transition: transform .15s;
-    animation:transformAnimFromRight 1s ease-out backwards .6s, opacityAnim 1s ease-out backwards .8s;
+    /* animation:transformAnimFromRight 1s ease-out reverse .6s, opacityAnim 1s ease-out reverse .8s; */
+    animation:transformAnimFromRight 1.2s ease-out reverse , opacityAnim 1.2s ease-out reverse ;  
     
     
     }
@@ -391,7 +392,8 @@ body {
     color: var(--mainTextColor);
     font-weight: 800;
     z-index: 7;
-    animation: transformAnimFromRight 1s ease-out backwards .4s, opacityAnim 1s ease-out backwards .8s;
+    /* animation: transformAnimFromRight 1s ease-out reverse .4s, opacityAnim 1s ease-out reverse .8s; */
+    animation: transformAnimFromRight 1s ease-out reverse .3s, opacityAnim 1s ease-out reverse   ;
 }
 
  .header__title {
@@ -477,32 +479,38 @@ body {
     top: -48%;
     left: 31%;
     z-index: -1;
-    animation: transformAnimFromRight 1s ease-out backwards .4s, opacityAnim 1s ease-out backwards .8s;
+    /* transform: translateX(100vh) ; */
+    /* animation: transformAnimFromRight 1s ease-out reverse .4s, opacityAnim 1s ease-out reverse .8s; */
+    animation: transformAnimFromRight 1s ease-out reverse .3s, opacityAnim 1s ease-out reverse ;
 }
 
 .section__header .cloud__vector:nth-child(2){
     top: -16%;
     left: -38%;
     z-index: -1;
-    animation: transformAnimFromRight 1s ease-out backwards .4s, opacityAnim 1s ease-out backwards .8s;
+    /* animation: transformAnimFromRight 1s ease-out reverse .4s, opacityAnim 1s ease-out reverse .8s; */
+    animation: transformAnimFromRight 1s ease-out reverse .3s, opacityAnim 1s ease-out reverse ;
 }
 
 .section__header .cloud__vector:nth-child(3){
     top: 0;
     left: 69%;
-    animation: transformAnimFromRight 1s ease-out backwards .8s, opacityAnim 1s ease-out backwards .8s;
+    /* animation: transformAnimFromRight 1s ease-out reverse .8s, opacityAnim 1s ease-out reverse .8s; */
+    animation: transformAnimFromRight 1s ease-out reverse .3s, opacityAnim 1s ease-out reverse ;  
 }
 
 .section__header .cloud__vector:nth-child(4){
    top: 44%;
     left: -45%;
-    animation: transformAnimFromRight 1s ease-out backwards .8s, opacityAnim 1s ease-out backwards .8s;
+    /* animation: transformAnimFromRight 1s ease-out reverse .8s, opacityAnim 1s ease-out reverse .8s; */
+    animation: transformAnimFromRight 1.1s ease-out reverse .3s, opacityAnim 1.1s ease-out reverse ;
 }
 
 .section__header .cloud__vector:nth-child(5){
     top:56%;
     left: 47%;
-    animation: transformAnimFromRight 1s ease-out backwards .6s, opacityAnim 1s ease-out backwards .8s;
+    /* animation: transformAnimFromRight 1s ease-out reverse .6s, opacityAnim 1s ease-out reverse .8s; */
+    animation: transformAnimFromRight 1.1s ease-out reverse .3s, opacityAnim 1.1s ease-out reverse  ;
   
 }
 
@@ -690,11 +698,11 @@ overflow: hidden;
  }
 
  @keyframes opacityAnim {
-    from {
+    /* from {
         opacity: 0;
-    }
+    } */
     to {
-        opacity: 1
+        opacity: 0
     }
     }
 
@@ -710,12 +718,12 @@ overflow: hidden;
     
 
  @keyframes transformAnimFromRight {
-    from {
-        transform: translateX(100vw);
-        
-    }
-    to{
+    /* from {
         transform: translateX(0);
+        
+    } */
+    to{
+        transform: translateX(100vh);
     }
    
 }
