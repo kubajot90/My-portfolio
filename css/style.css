@@ -575,11 +575,16 @@ body {
     color: var(--mainTextColor);
 }
 
+.title__button-container {
+    transform: translateX(-120%);
+    animation-delay: .7s;
+}
+
 .title-button {
-    width: 40%;
+    /* width: 40%; */
     margin-top: 5px;
     margin-left: 5%;
-    padding: 7px 0;
+    padding: 8px 12px;
     color: white;
     background-color: var(--mainTextColor);
     border: none;
@@ -588,8 +593,8 @@ body {
     font-family: 'Poppins';
     cursor: pointer;
     transition: transform .2s ease-in;
-    transform: translateX(-120%);
-    animation-delay: .7s;
+    /* transform: translateX(-120%); */
+    /* animation-delay: .7s; */
 }
 
 .title-button:hover {
@@ -597,11 +602,11 @@ body {
 }
 
 .image-box {
-    /* flex-basis: 100%; */
+    position: relative;
     width: 65%;
     height: 75%;
-    /* margin-left: 7%; */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.207);
+    overflow: hidden;
 }
 
 .about-me__image {
@@ -611,6 +616,34 @@ body {
     background-position: center;
     background-size: cover;
     
+}
+
+.image__cover-blue {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: #072142;
+    transform: translateX(-100%);
+    animation-delay: .4s;  
+/* animation: name duration timing-function delay iteration-count direction fill-mode; */
+animation-duration: 1s;
+animation-timing-function: ease-in-out;
+overflow: hidden;
+}
+
+.image__cover-red {
+    position: absolute;
+    top: 0;
+    left:0%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--mainTextColor);
+    transform: translateX(-99%);
+    animation-delay: .4s;
+    animation-duration: 1.4s;
+    animation-timing-function: ease-in-out;
 }
 
 
