@@ -11,6 +11,8 @@ export class Scroll {
 
     this.headerTitles = null;
     this.clouds = null;
+
+    this.main = null;
   }
 
   init() {
@@ -26,20 +28,29 @@ export class Scroll {
       "[data-header-Animation-from-left]"
     );
     this.clouds = document.querySelectorAll(".header-Animation-from-right");
+    this.main = document.querySelector(".main");
   }
 
   addListeners() {
     document.addEventListener("wheel", (e) => {
-      this.isWheel = true;
-      this.setCurrentSectionIndex(e);
-      this.isWheel = false;
+      if (!this.blockScroll()) {
+        this.isWheel = true;
+        this.setCurrentSectionIndex(e);
+        this.isWheel = false;
+      }
     });
 
     document.addEventListener("touchstart", (e) => {
-      this.isTouch = true;
-      this.touchStart = e.touches[0].clientY;
+      if (!this.blockScroll()) {
+        this.isTouch = true;
+        this.touchStart = e.touches[0].clientY;
+      }
     });
-    document.addEventListener("touchmove", (e) => this.checkTouch(e));
+    document.addEventListener("touchmove", (e) => {
+      if (!this.blockScroll()) {
+        this.checkTouch(e);
+      }
+    });
 
     window.addEventListener("hashchange", () => {
       this.changeCurrentSectionIndexByNav();
@@ -151,5 +162,9 @@ export class Scroll {
         this.currentSectionIndex = index;
       }
     });
+  }
+
+  blockScroll() {
+    return document.getElementsByClassName("hide-section").length;
   }
 }

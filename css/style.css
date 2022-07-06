@@ -1,8 +1,6 @@
 :root {
     --mainTextColor: #ff4d5a;
     --mainHoverOpacity: 0.3;
-    /* --transformPseudoBefore:   rotate(45deg) translate3d(0%, 400%, 0); */
-    /* --transformPseudoAfter:   rotate(-45deg) translate3d(0%, -400%, 0); */
     --transformPseudoBefore: rotate(0) translate3d(0, 0, 0);
     --transformPseudoAfter:   rotate(0) translate3d(0, 0, 0);
 }
@@ -14,7 +12,7 @@
 }
 
 html {
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     scroll-behavior: smooth;
@@ -85,7 +83,11 @@ body {
 .main {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow-x: hidden;
+    overflow-y: hidden;
+    
+    
 }
 
 .big__navigation {
@@ -513,20 +515,16 @@ body {
 }
 
 .section__container {
-    /* position: absolute;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    color: white; */
     display: flex;
     position: relative;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    margin: 0 5%;
-    /* margin: 40px 5%; */
-    /* flex-wrap: wrap; */
+    /* margin: 0 5%; */
+    margin-left: 5%;
+    margin-right: 5%;
+    transition: 1s;
 }
 
 .title-box {
@@ -534,6 +532,7 @@ body {
     color: white;
     flex-direction: column;
     overflow: hidden;
+    z-index: 1;
 }
 
 .title-h1 {
@@ -581,7 +580,6 @@ body {
 }
 
 .title-button {
-    /* width: 40%; */
     margin-top: 5px;
     margin-left: 5%;
     padding: 8px 12px;
@@ -593,8 +591,6 @@ body {
     font-family: 'Poppins';
     cursor: pointer;
     transition: transform .2s ease-in;
-    /* transform: translateX(-120%); */
-    /* animation-delay: .7s; */
 }
 
 .title-button:hover {
@@ -607,12 +603,13 @@ body {
     height: 75%;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.207);
     overflow: hidden;
+    transition: .4s;
 }
 
 .about-me__image {
     width: 100%;
     height: 100%;
-    background-image: url('../image/moon-min-red-2.jpg');
+    background-image: url('../image/moon-min-red.jpg');
     background-position: center;
     background-size: cover;
     
@@ -646,6 +643,9 @@ overflow: hidden;
     animation-timing-function: ease-in-out;
 }
 
+.hide-section {
+    display: none;
+}
 
 
 

@@ -1,6 +1,7 @@
 import { Scroll } from "./Scroll.js";
 import { Paralaxa } from "./Paralaxa.js";
 import { NavAnimation } from "./NavAnimation.js";
+import { ShowSection } from "./ShowSection.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const scroll = new Scroll();
@@ -10,4 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const navAnimation = new NavAnimation();
   navAnimation.init();
   navAnimation.blackScreenShow(500);
+  const showSection = new ShowSection();
+  showSection.init();
 });
