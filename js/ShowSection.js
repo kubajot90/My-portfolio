@@ -1,7 +1,10 @@
 export class ShowSection {
   constructor() {
+    this.isButtonClicked = false;
+
     this.sectionButtons = null;
     this.sections = null;
+    this.blackScreen = null;
   }
 
   init() {
@@ -12,12 +15,28 @@ export class ShowSection {
   handleElements() {
     this.sectionButtons = document.querySelectorAll(".title-button");
     this.sections = document.querySelectorAll("section");
+    this.blackScreen = document.querySelector(".black__screen");
   }
 
   addListeners() {
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => this.showSection(e))
     );
+
+    window.addEventListener("click", () => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "about-me.html", true);
+      xhr.send();
+
+      xhr.onload = function () {
+        document
+          .querySelector(".section__container")
+          .insertAdjacentHTML("beforeend", this.responseText);
+
+        // .innerHTML =
+        //   this.responseText;
+      };
+    });
   }
 
   showSection(e) {
@@ -33,10 +52,10 @@ export class ShowSection {
 
     this.sections[currentSectionIndex].classList.remove("hide-section");
 
-    main.style.overflowY = "visible";
-    sectionContainer.style.marginRight = "0";
-    imageBox.style.height = "100%";
-    // imageBox.style.transform = "scale(1.25)";
+    main.classList.toggle("main--section-expand");
+    sectionContainer.classList.toggle("section__container--section-expand");
+    imageBox.classList.toggle("image-box--section-expand");
+    this.blackScreen.classList.toggle("black__screen--section-background");
   }
 
   hideAllSections() {
