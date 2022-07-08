@@ -23,20 +23,20 @@ export class ShowSection {
       button.addEventListener("click", (e) => this.showSection(e))
     );
 
-    window.addEventListener("click", () => {
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET", "about-me.html", true);
-      xhr.send();
+    // window.addEventListener("popstate", (e) => {
+    //   // const xhr = new XMLHttpRequest();
+    //   // xhr.open("GET", "about-me.html", true);
+    //   // xhr.send();
 
-      xhr.onload = function () {
-        document
-          .querySelector(".section__container")
-          .insertAdjacentHTML("beforeend", this.responseText);
+    //   // xhr.onload = function () {
+    //   //   document
+    //   //     .querySelector(".section__container")
+    //   //     .insertAdjacentHTML("beforeend", this.responseText);
 
-        // .innerHTML =
-        //   this.responseText;
-      };
-    });
+    //   // };
+    //   console.log(e);
+    //   console.log(e.state);
+    // });
   }
 
   showSection(e) {

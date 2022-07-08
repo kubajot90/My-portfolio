@@ -1,3 +1,5 @@
+import { ChangeUrl } from "./ChangeUrl.js";
+
 export class Scroll {
   constructor() {
     this.sections = null;
@@ -13,12 +15,16 @@ export class Scroll {
     this.clouds = null;
 
     this.main = null;
+
+    this.changeUrl = new ChangeUrl();
   }
 
   init() {
     this.handleElements();
     this.addListeners();
-    this.sections[0].scrollIntoView({ behavior: "smooth" });
+    // this.sections[0].scrollIntoView({ behavior: "smooth" });
+    this.moveToSection(this.sections[0], "smooth");
+    this.changeUrl.init();
     // this.sectionOnView(this.currentSectionIndex);
   }
 
@@ -33,27 +39,44 @@ export class Scroll {
 
   addListeners() {
     document.addEventListener("wheel", (e) => {
-      if (!this.blockScroll()) {
-        this.isWheel = true;
-        this.setCurrentSectionIndex(e);
-        this.isWheel = false;
+      if (!this.isScroll) {
+        this.checkIsScroll();
+        if (!this.blockScroll()) {
+          this.isWheel = true;
+          this.setCurrentSectionIndex(e);
+          this.isWheel = false;
+        }
       }
+
+      // if (!this.blockScroll()) {
+      //   this.isWheel = true;
+      //   this.setCurrentSectionIndex(e);
+      //   this.isWheel = false;
+      // }
     });
 
     document.addEventListener("touchstart", (e) => {
-      if (!this.blockScroll()) {
-        this.isTouch = true;
-        this.touchStart = e.touches[0].clientY;
+      if (!this.isScroll) {
+        this.checkIsScroll();
+        if (!this.blockScroll()) {
+          this.isTouch = true;
+          this.touchStart = e.touches[0].clientY;
+        }
       }
     });
     document.addEventListener("touchmove", (e) => {
-      if (!this.blockScroll()) {
-        this.checkTouch(e);
+      if (!this.isScroll) {
+        this.checkIsScroll();
+        if (!this.blockScroll()) {
+          this.checkTouch(e);
+        }
       }
     });
 
     window.addEventListener("hashchange", () => {
+      console.log("hashchange");
       this.changeCurrentSectionIndexByNav();
+      console.log("cu sec index: " + this.currentSectionIndex);
       this.homePageAnimation();
       this.sectionsAnimations();
     });
@@ -66,12 +89,16 @@ export class Scroll {
       ? (this.scrollDirection = e.wheelDelta)
       : (this.scrollDirection = this.scrollDirection);
 
-    if (!this.isScroll) {
-      this.checkIsScroll();
-      this.scrollDirection > 0
-        ? this.currentSectionIndex--
-        : this.currentSectionIndex++;
-    }
+    // if (!this.isScroll) {
+    //   this.checkIsScroll();
+    //   this.scrollDirection > 0
+    //     ? this.currentSectionIndex--
+    //     : this.currentSectionIndex++;
+    // }
+
+    this.scrollDirection > 0
+      ? this.currentSectionIndex--
+      : this.currentSectionIndex++;
 
     if (this.currentSectionIndex <= 0) {
       this.currentSectionIndex = 0;
@@ -80,7 +107,8 @@ export class Scroll {
     }
 
     this.isTouch
-      ? this.sections[this.currentSectionIndex].scrollIntoView()
+      ? // ? this.sections[this.currentSectionIndex].scrollIntoView()
+        this.moveToSection(this.sections[this.currentSectionIndex], "auto")
       : this.sectionOnView(this.currentSectionIndex);
 
     this.sectionsAnimations();
@@ -96,8 +124,14 @@ export class Scroll {
   sectionOnView(indexOfSection) {
     this.homePageAnimation();
     setTimeout(() => {
-      this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
+      // this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
+      this.moveToSection(this.sections[indexOfSection], "smooth");
     }, 200);
+  }
+
+  moveToSection(section, scrollBehavior) {
+    section.scrollIntoView({ behavior: scrollBehavior });
+    this.changeUrl.changeUrl(section);
   }
 
   checkTouch(e) {
@@ -113,6 +147,7 @@ export class Scroll {
   }
 
   homePageAnimation() {
+    console.log("homePageAnimation");
     if (this.currentSectionIndex !== 0) {
       this.headerTitles.forEach((elm) =>
         elm.classList.add("reverseTransformFromLeft")
@@ -132,7 +167,7 @@ export class Scroll {
 
   sectionsAnimations() {
     // this.clearAnimationClass("transformAnimFromLeft");
-
+    console.log("sectionAnimation");
     const elements = document.querySelectorAll(
       `[data-section-${this.currentSectionIndex}]`
     );
@@ -158,10 +193,14 @@ export class Scroll {
 
   changeCurrentSectionIndexByNav() {
     this.sections.forEach((section, index) => {
-      if (section.getBoundingClientRect().y === 0) {
+      // if (section.getBoundingClientRect().y === 0) {
+      //   this.currentSectionIndex = index;
+      // }
+      if (section.getAttribute("id") === this.changeUrl.state) {
         this.currentSectionIndex = index;
       }
     });
+    console.log("cu sec by nav: " + this.currentSectionIndex);
   }
 
   blockScroll() {
