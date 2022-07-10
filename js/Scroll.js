@@ -16,16 +16,16 @@ export class Scroll {
 
     this.main = null;
 
+    this.navItems = null;
+
     this.changeUrl = new ChangeUrl();
   }
 
   init() {
     this.handleElements();
     this.addListeners();
-    // this.sections[0].scrollIntoView({ behavior: "smooth" });
     this.moveToSection(this.sections[0], "smooth");
     this.changeUrl.init();
-    // this.sectionOnView(this.currentSectionIndex);
   }
 
   handleElements() {
@@ -35,6 +35,7 @@ export class Scroll {
     );
     this.clouds = document.querySelectorAll(".header-Animation-from-right");
     this.main = document.querySelector(".main");
+    this.navItems = document.querySelectorAll(".big__navigation-item");
   }
 
   addListeners() {
@@ -77,8 +78,22 @@ export class Scroll {
       console.log("hashchange");
       this.changeCurrentSectionIndexByNav();
       // console.log("cu sec index: " + this.currentSectionIndex);
+      // window.location.hash = `#${id}`;
       this.homePageAnimation();
       this.sectionsAnimations();
+    });
+
+    this.navItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const id = item.dataset.id;
+        // const section = document.querySelector(`#${id}`);
+        history.pushState(`${id}`, null, `#${id}`);
+        // section.scrollIntoView({ behavior: "smooth" });
+        window.location.hash = `#${id}`;
+        this.changeCurrentSectionIndexByNav();
+        this.homePageAnimation();
+        this.sectionsAnimations();
+      });
     });
   }
 
@@ -196,7 +211,8 @@ export class Scroll {
       // if (section.getBoundingClientRect().y === 0) {
       //   this.currentSectionIndex = index;
       // }
-      if (section.getAttribute("id") === this.changeUrl.state) {
+      // if (section.getAttribute("id") === this.changeUrl.state) {
+      if (section.getAttribute("id") === window.location.hash.slice(1)) {
         this.currentSectionIndex = index;
       }
     });

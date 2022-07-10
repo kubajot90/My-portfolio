@@ -10,34 +10,10 @@ export class ChangeUrl {
   handleElements() {}
 
   addListeners() {
-    document.querySelectorAll(".big__navigation-item").forEach((item) => {
-      item.addEventListener("click", () => {
-        console.log("listener li");
-        const id = item.dataset.id;
-        console.log("id: " + id);
-        const section = document.querySelector(`#${id}`);
-        console.log(section);
-        history.pushState(`${id}`, null, `#${id}`);
-        section.scrollIntoView({ behavior: "smooth" });
-      });
-    });
-
     window.addEventListener("popstate", (e) => {
-      // const xhr = new XMLHttpRequest();
-      // xhr.open("GET", "about-me.html", true);
-      // xhr.send();
-
-      // xhr.onload = function () {
-      //   document
-      //     .querySelector(".section__container")
-      //     .insertAdjacentHTML("beforeend", this.responseText);
-
-      // };
-      console.log("popstate");
-      console.log(e);
-
-      this.state = e.state;
-      const section = document.getElementById(`${this.state}`);
+      const section = document.getElementById(
+        `${window.location.hash.slice(1)}`
+      );
       section.scrollIntoView({ behavior: "smooth" });
     });
   }
