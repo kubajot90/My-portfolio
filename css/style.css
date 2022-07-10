@@ -29,13 +29,23 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    /* opacity: 0; */
     background-color: #020b16;
     z-index: 8;
-    transition: transform .5s ease-out;
+    transition: transform .5s ease-out, opacity .5s ease-out;
+    /* transition: opacity  .5s ease-out; */
+   
 }
 
 .black__screen--show {
   transform: translateY(100%);
+}
+
+.black__screen--section-background {
+    top:0;
+    z-index: 1;
+    /* opacity: 1; */
+    animation: opacityAnim 1s reverse ;
 }
 
 .background__circles  {
@@ -83,12 +93,13 @@ body {
 .main {
     width: 100vw;
     height: 100vh;
-    /* overflow: hidden; */
     overflow-x: hidden;
     overflow-y: hidden;
-    
-    
-}
+    }
+
+    .main--section-expand {
+        overflow-y: visible;
+    }
 
 .big__navigation {
     position: fixed;
@@ -139,7 +150,7 @@ body {
     text-decoration: none;
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.295);
     transform: translateY(100%);
-   
+    cursor: pointer;
    
 }
 
@@ -533,6 +544,11 @@ body {
     margin-left: 5%;
     margin-right: 5%;
     transition: 1s;
+    flex-wrap: wrap;
+}
+
+.section__container--section-expand {
+    margin-right: 0;
 }
 
 .title-box {
@@ -612,6 +628,11 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.207);
     overflow: hidden;
     transition: .4s;
+    z-index: 2;
+}
+
+.image-box--section-expand {
+    height: 100%;
 }
 
 .about-me__image {
@@ -649,6 +670,16 @@ overflow: hidden;
     animation-delay: .4s;
     animation-duration: 1.4s;
     animation-timing-function: ease-in-out;
+}
+
+.section__container-expand {
+    background-color: #fff;
+    width: 100vw;
+    /* height: 100vh; */
+    /* position: absolute; */
+    /* flex-basis: 100%;
+    width: 100%; */
+    z-index: 99;
 }
 
 .hide-section {
@@ -714,6 +745,7 @@ overflow: hidden;
         opacity: 0;
     }
     }
+
 
     
 
@@ -867,5 +899,15 @@ overflow: hidden;
                    
          }
 
+         .image-test {
+            position: absolute;
+            background-image: url(/image/chmura.svg);
+            height: 600px;
+            width: 600px;
+            z-index: 999;
+            fill: #ff4d5a;
+            color: #ff4d5a;
+         }
+         
          
   

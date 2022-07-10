@@ -76,7 +76,7 @@ export class Scroll {
     window.addEventListener("hashchange", () => {
       console.log("hashchange");
       this.changeCurrentSectionIndexByNav();
-      console.log("cu sec index: " + this.currentSectionIndex);
+      // console.log("cu sec index: " + this.currentSectionIndex);
       this.homePageAnimation();
       this.sectionsAnimations();
     });
@@ -147,7 +147,7 @@ export class Scroll {
   }
 
   homePageAnimation() {
-    console.log("homePageAnimation");
+    // console.log("homePageAnimation");
     if (this.currentSectionIndex !== 0) {
       this.headerTitles.forEach((elm) =>
         elm.classList.add("reverseTransformFromLeft")
@@ -167,7 +167,7 @@ export class Scroll {
 
   sectionsAnimations() {
     // this.clearAnimationClass("transformAnimFromLeft");
-    console.log("sectionAnimation");
+    // console.log("sectionAnimation");
     const elements = document.querySelectorAll(
       `[data-section-${this.currentSectionIndex}]`
     );
@@ -200,7 +200,7 @@ export class Scroll {
         this.currentSectionIndex = index;
       }
     });
-    console.log("cu sec by nav: " + this.currentSectionIndex);
+    // console.log("cu sec by nav: " + this.currentSectionIndex);
   }
 
   blockScroll() {
