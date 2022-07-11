@@ -220,6 +220,10 @@ export class Scroll {
   }
 
   blockScroll() {
+    console.log("block");
+    console.log(
+      "hide sect: " + document.getElementsByClassName("hide-section").length
+    );
     return document.getElementsByClassName("hide-section").length;
   }
 }

@@ -14,6 +14,7 @@ export class ChangeUrl {
       const section = document.getElementById(
         `${window.location.hash.slice(1)}`
       );
+      console.log("popstate1");
       section.scrollIntoView({ behavior: "smooth" });
     });
   }

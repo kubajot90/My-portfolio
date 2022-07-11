@@ -355,7 +355,7 @@ body {
    width: 80vh;
    height: 80vh;
 }
-.section__header .moon__shade svg {
+.section__header .moon__shade-svg {
     position: absolute;
     top: -19%;
     left: -18%;
@@ -364,6 +364,15 @@ body {
     opacity: 0.7;
 
 }
+/* .section__header .moon__shade svg {
+    position: absolute;
+    top: -19%;
+    left: -18%;
+    height: 115vh;
+    width: 115vh;
+    opacity: 0.7;
+
+} */
 
 
 .section__header .moon__hole-big {
