@@ -1,12 +1,15 @@
-export class ShowSection {
+import { Common } from "./Common.js";
+
+export class ShowSection extends Common {
   constructor() {
+    super();
     this.isButtonClicked = false;
     this.currentSectionIndex = null;
     this.currentAnimationSectionIndex = null;
 
     this.sectionButtons = null;
     this.sections = null;
-    this.navItems = null;
+    // this.navItems = null;
     this.blackScreen = null;
   }
 
@@ -18,15 +21,18 @@ export class ShowSection {
   handleElements() {
     this.sectionButtons = document.querySelectorAll(".title-button");
     this.sections = document.querySelectorAll("section");
-    this.navItems = document.querySelectorAll(".big__navigation-item");
+    // this.navItems = document.querySelectorAll(".big__navigation-item");
     this.blackScreen = document.querySelector(".black__screen");
   }
 
   addListeners() {
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
-        this.currentSectionIndex = e.target.dataset.currentSection;
-        this.currentAnimationSectionIndex = this.currentSectionIndex;
+        // this.currentSectionIndex = e.target.dataset.currentSection;
+        // this.currentAnimationSectionIndex = this.currentSectionIndex;
+        this.currentAnimationSectionIndex = e.target.dataset.currentSection;
+
+        this.checkCurrentSectionIndex();
         this.toggleSectionView(e);
       })
     );
@@ -45,7 +51,10 @@ export class ShowSection {
           // this.currentSectionIndexFunc();
           this.currentSectionIndex = this.currentAnimationSectionIndex;
           console.log("obecna sekcja--------" + this.currentSectionIndex);
+          this.checkCurrentSectionIndex();
           this.toggleSectionView(e);
+
+          this.homePageAnimation();
         }
       });
     });
@@ -70,25 +79,31 @@ export class ShowSection {
     this.isButtonClicked = !this.isButtonClicked;
 
     console.log(this.sections);
-    console.log("cusec index: " + this.currentSectionIndex);
+    console.log("cusec index: " + this.currentSectionIndex2);
     const sectionContainer = this.sections[
-      this.currentSectionIndex
+      this.currentAnimationSectionIndex
     ].querySelector(".section__container");
+    console.log("this.sections: " + this.sections);
+    console.log("this.currentsectionindex2: " + this.currentSectionIndex);
 
     const imageBox =
-      this.sections[this.currentSectionIndex].querySelector(".image-box");
+      this.sections[this.currentAnimationSectionIndex].querySelector(
+        ".image-box"
+      );
 
     const main = document.querySelector(".main");
     this.hideAllSections();
 
-    this.sections[this.currentSectionIndex].classList.remove("hide-section");
+    this.sections[this.currentAnimationSectionIndex].classList.remove(
+      "hide-section"
+    );
 
     main.classList.toggle("main--section-expand");
     sectionContainer.classList.toggle("section__container--section-expand");
     imageBox.classList.toggle("image-box--section-expand");
     this.blackScreen.classList.toggle("black__screen--section-background");
 
-    const id = this.sections[this.currentSectionIndex].getAttribute("id");
+    const id = this.sections[this.currentSectionIndex2].getAttribute("id");
     history.pushState(`${id}`, null, `#${id}`);
 
     if (!this.isButtonClicked) {
