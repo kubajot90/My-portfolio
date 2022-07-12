@@ -11,9 +11,7 @@ export class Common {
     navItems: document.querySelectorAll(".big__navigation-item"),
     main: document.querySelector(".main"),
     sections: document.querySelectorAll(".section"),
-    headerTitles: document.querySelectorAll(
-      "[data-header-Animation-from-left]"
-    ),
+    headerTitles: document.querySelectorAll("[data-header-Animation]"),
     clouds: document.querySelectorAll(".header-Animation-from-right"),
   };
 

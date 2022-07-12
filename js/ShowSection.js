@@ -34,6 +34,7 @@ export class ShowSection extends Common {
         this.toggleSectionView(e);
         this.ChosenNavItemId = window.location.hash.slice(1);
         this.buttonsAnimationToggle();
+        this.sectionNumberAnimationToggle();
       })
     );
 
@@ -46,6 +47,7 @@ export class ShowSection extends Common {
         this.isButtonClicked = false;
       }
       this.buttonsAnimationToggle();
+      this.sectionNumberAnimationToggle();
     });
 
     this.navItems.forEach((item) => {
@@ -56,6 +58,7 @@ export class ShowSection extends Common {
           this.toggleSectionView(e);
         }
         this.buttonsAnimationToggle();
+        // this.sectionNumberAnimationToggle();
       });
     });
 
@@ -117,9 +120,17 @@ export class ShowSection extends Common {
   }
 
   buttonsAnimationToggle() {
-    this.sectionButtons.forEach((button) => {
-      button.classList.toggle("title__button--hide");
-    });
+    this.sectionButtons.forEach((button) =>
+      button.classList.toggle("title__button--hide")
+    );
+  }
+
+  sectionNumberAnimationToggle() {
+    const sectionNumbers = document.querySelectorAll(".section__number");
+
+    sectionNumbers.forEach((number) =>
+      number.classList.toggle("transformAnimSections")
+    );
   }
 
   // currentSectionIndexFunc() {

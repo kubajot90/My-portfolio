@@ -33,7 +33,7 @@ export class Scroll extends Common {
   // handleElements() {
   //   this.sections = document.querySelectorAll(".section");
   //   this.headerTitles = document.querySelectorAll(
-  //     "[data-header-Animation-from-left]"
+  //     "[data-header-Animation]"
   //   );
   //   this.clouds = document.querySelectorAll(".header-Animation-from-right");
   //   this.main = document.querySelector(".main");
