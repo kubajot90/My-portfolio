@@ -1,13 +1,15 @@
-export class ChangeUrl {
+import { Common } from "./Common.js";
+
+export class ChangeUrl extends Common {
   constructor() {
-    this.state = null;
-  }
-  init() {
-    this.handleElements();
-    this.addListeners();
+    super();
+    // this.previousSection = null;
+    // this.isPushStateBlock = false;
   }
 
-  handleElements() {}
+  init() {
+    this.addListeners();
+  }
 
   addListeners() {
     window.addEventListener("popstate", (e) => {

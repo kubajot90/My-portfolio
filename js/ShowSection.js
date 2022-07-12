@@ -4,11 +4,12 @@ export class ShowSection extends Common {
   constructor() {
     super();
     this.isButtonClicked = false;
+    this.ChosenNavItemId = null;
     this.currentSectionIndex = null;
     this.currentAnimationSectionIndex = null;
 
     this.sectionButtons = null;
-    this.sections = null;
+    // this.sections = null;
     // this.navItems = null;
     this.blackScreen = null;
   }
@@ -20,7 +21,7 @@ export class ShowSection extends Common {
 
   handleElements() {
     this.sectionButtons = document.querySelectorAll(".title-button");
-    this.sections = document.querySelectorAll("section");
+    // this.sections = document.querySelectorAll("section");
     // this.navItems = document.querySelectorAll(".big__navigation-item");
     this.blackScreen = document.querySelector(".black__screen");
   }
@@ -28,11 +29,8 @@ export class ShowSection extends Common {
   addListeners() {
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
-        // this.currentSectionIndex = e.target.dataset.currentSection;
-        // this.currentAnimationSectionIndex = this.currentSectionIndex;
-        this.currentAnimationSectionIndex = e.target.dataset.currentSection;
-
-        this.checkCurrentSectionIndex();
+        this.currentSectionIndex = e.target.dataset.currentSection;
+        this.currentAnimationSectionIndex = this.currentSectionIndex;
         this.toggleSectionView(e);
       })
     );
@@ -47,14 +45,10 @@ export class ShowSection extends Common {
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", (e) => {
+        console.log("nav2");
+        this.ChosenNavItemId = item.dataset.id;
         if (this.isButtonClicked) {
-          // this.currentSectionIndexFunc();
-          this.currentSectionIndex = this.currentAnimationSectionIndex;
-          console.log("obecna sekcja--------" + this.currentSectionIndex);
-          this.checkCurrentSectionIndex();
           this.toggleSectionView(e);
-
-          this.homePageAnimation();
         }
       });
     });
@@ -77,38 +71,28 @@ export class ShowSection extends Common {
 
   toggleSectionView(e) {
     this.isButtonClicked = !this.isButtonClicked;
-
-    console.log(this.sections);
-    console.log("cusec index: " + this.currentSectionIndex2);
     const sectionContainer = this.sections[
-      this.currentAnimationSectionIndex
+      this.currentSectionIndex
     ].querySelector(".section__container");
-    console.log("this.sections: " + this.sections);
-    console.log("this.currentsectionindex2: " + this.currentSectionIndex);
 
     const imageBox =
-      this.sections[this.currentAnimationSectionIndex].querySelector(
-        ".image-box"
-      );
+      this.sections[this.currentSectionIndex].querySelector(".image-box");
 
-    const main = document.querySelector(".main");
     this.hideAllSections();
 
-    this.sections[this.currentAnimationSectionIndex].classList.remove(
-      "hide-section"
-    );
+    this.sections[this.currentSectionIndex].classList.remove("hide-section");
 
-    main.classList.toggle("main--section-expand");
+    this.main.classList.toggle("main--section-expand");
     sectionContainer.classList.toggle("section__container--section-expand");
     imageBox.classList.toggle("image-box--section-expand");
     this.blackScreen.classList.toggle("black__screen--section-background");
 
-    const id = this.sections[this.currentSectionIndex2].getAttribute("id");
+    const id = this.sections[this.currentSectionIndex].getAttribute("id");
     history.pushState(`${id}`, null, `#${id}`);
 
     if (!this.isButtonClicked) {
       this.showAllSections();
-      window.location.hash = `#${id}`;
+      window.location.hash = `#${this.ChosenNavItemId}`;
     }
   }
 
@@ -129,6 +113,9 @@ export class ShowSection extends Common {
   //   });
   // }
 }
+
+//history.back() - dla strzłki do tyłu w sekcji.
+//zrób blokade wheel gdy jest pierwsza lub ostatnia sekcja.
 
 //history.back() - dla strzłki do tyłu w sekcji.
 //zrób blokade wheel gdy jest pierwsza lub ostatnia sekcja.

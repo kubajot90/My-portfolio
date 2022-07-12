@@ -1,26 +1,32 @@
 export class Common {
   constructor() {
-    this.sections = document.querySelectorAll(".section");
-    this.headerTitles = document.querySelectorAll(
-      "[data-header-Animation-from-left]"
-    );
-    this.clouds = document.querySelectorAll(".header-Animation-from-right");
-    this.main = document.querySelector(".main");
-    this.navItems = document.querySelectorAll(".big__navigation-item");
-
-    this.currentSectionIndex2 = null;
+    this.sections = this.htmlElements.sections;
+    this.headerTitles = this.htmlElements.headerTitles;
+    this.clouds = this.htmlElements.clouds;
+    this.main = this.htmlElements.main;
+    this.navItems = this.htmlElements.navItems;
   }
 
+  htmlElements = {
+    navItems: document.querySelectorAll(".big__navigation-item"),
+    main: document.querySelector(".main"),
+    sections: document.querySelectorAll(".section"),
+    headerTitles: document.querySelectorAll(
+      "[data-header-Animation-from-left]"
+    ),
+    clouds: document.querySelectorAll(".header-Animation-from-right"),
+  };
+
   homePageAnimation() {
-    console.log("homePageAnimation Common");
-    if (this.currentSectionIndex2 !== 0) {
+    console.log("homePageAnimation");
+    if (this.currentSectionIndex !== 0) {
       this.headerTitles.forEach((elm) =>
         elm.classList.add("reverseTransformFromLeft")
       );
       this.clouds.forEach((elm) =>
         elm.classList.add("reverseTransformAnimFromRight")
       );
-    } else if (this.currentSectionIndex2 === 0) {
+    } else if (this.currentSectionIndex === 0) {
       this.headerTitles.forEach((elm) =>
         elm.classList.remove("reverseTransformFromLeft")
       );
@@ -30,15 +36,29 @@ export class Common {
     }
   }
 
-  checkCurrentSectionIndex() {
-    this.sections.forEach((section, index) => {
-      if (section.getAttribute("id") === window.location.hash.slice(1)) {
-        this.currentSectionIndex2 = index;
-      }
-    });
-    console.log(
-      "-----------------------currensectionindex2 common: " +
-        this.currentSectionIndex2
-    );
-  }
+  // homePageAnimation() {
+  //   if (this.currentSectionIndex !== 0) {
+  //     this.headerTitles.forEach((elm) =>
+  //       elm.classList.add("reverseTransformFromLeft")
+  //     );
+  //     this.clouds.forEach((elm) =>
+  //       elm.classList.add("reverseTransformAnimFromRight")
+  //     );
+  //   } else if (this.currentSectionIndex === 0) {
+  //     this.headerTitles.forEach((elm) =>
+  //       elm.classList.remove("reverseTransformFromLeft")
+  //     );
+  //     this.clouds.forEach((elm) =>
+  //       elm.classList.remove("reverseTransformAnimFromRight")
+  //     );
+  //   }
+  // }
+
+  // checkCurrentSectionIndex() {
+  //   this.sections.forEach((section, index) => {
+  //     if (section.getAttribute("id") === window.location.hash.slice(1)) {
+  //       this.currentSectionIndexCommon = index;
+  //     }
+  //   });
+  // }
 }

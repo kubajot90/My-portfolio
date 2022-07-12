@@ -1,8 +1,10 @@
 import { ChangeUrl } from "./ChangeUrl.js";
+import { Common } from "./Common.js";
 
-export class Scroll {
+export class Scroll extends Common {
   constructor() {
-    this.sections = null;
+    super();
+    // this.sections = null;
     this.currentSectionIndex = 0;
     this.isScroll = false;
     this.isWheel = false;
@@ -11,32 +13,32 @@ export class Scroll {
     this.scrollDirection = null;
     this.isTouch = false;
 
-    this.headerTitles = null;
-    this.clouds = null;
+    // this.headerTitles = null;
+    // this.clouds = null;
 
-    this.main = null;
+    // this.main = null;
 
-    this.navItems = null;
+    // this.navItems = null;
 
     this.changeUrl = new ChangeUrl();
   }
 
   init() {
-    this.handleElements();
+    // this.handleElements();
     this.addListeners();
     this.moveToSection(this.sections[0], "smooth");
     this.changeUrl.init();
   }
 
-  handleElements() {
-    this.sections = document.querySelectorAll(".section");
-    this.headerTitles = document.querySelectorAll(
-      "[data-header-Animation-from-left]"
-    );
-    this.clouds = document.querySelectorAll(".header-Animation-from-right");
-    this.main = document.querySelector(".main");
-    this.navItems = document.querySelectorAll(".big__navigation-item");
-  }
+  // handleElements() {
+  //   this.sections = document.querySelectorAll(".section");
+  //   this.headerTitles = document.querySelectorAll(
+  //     "[data-header-Animation-from-left]"
+  //   );
+  //   this.clouds = document.querySelectorAll(".header-Animation-from-right");
+  //   this.main = document.querySelector(".main");
+  //   this.navItems = document.querySelectorAll(".big__navigation-item");
+  // }
 
   addListeners() {
     document.addEventListener("wheel", (e) => {
@@ -85,6 +87,7 @@ export class Scroll {
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", () => {
+        console.log("nav1");
         const id = item.dataset.id;
         // const section = document.querySelector(`#${id}`);
         history.pushState(`${id}`, null, `#${id}`);
@@ -127,6 +130,7 @@ export class Scroll {
       : this.sectionOnView(this.currentSectionIndex);
 
     this.sectionsAnimations();
+    // this.homePageAnimation();
   }
 
   checkIsScroll() {
@@ -161,24 +165,24 @@ export class Scroll {
     this.isTouch = false;
   }
 
-  homePageAnimation() {
-    // console.log("homePageAnimation");
-    if (this.currentSectionIndex !== 0) {
-      this.headerTitles.forEach((elm) =>
-        elm.classList.add("reverseTransformFromLeft")
-      );
-      this.clouds.forEach((elm) =>
-        elm.classList.add("reverseTransformAnimFromRight")
-      );
-    } else if (this.currentSectionIndex === 0) {
-      this.headerTitles.forEach((elm) =>
-        elm.classList.remove("reverseTransformFromLeft")
-      );
-      this.clouds.forEach((elm) =>
-        elm.classList.remove("reverseTransformAnimFromRight")
-      );
-    }
-  }
+  // homePageAnimation() {
+  //   // console.log("homePageAnimation");
+  //   if (this.currentSectionIndex !== 0) {
+  //     this.headerTitles.forEach((elm) =>
+  //       elm.classList.add("reverseTransformFromLeft")
+  //     );
+  //     this.clouds.forEach((elm) =>
+  //       elm.classList.add("reverseTransformAnimFromRight")
+  //     );
+  //   } else if (this.currentSectionIndex === 0) {
+  //     this.headerTitles.forEach((elm) =>
+  //       elm.classList.remove("reverseTransformFromLeft")
+  //     );
+  //     this.clouds.forEach((elm) =>
+  //       elm.classList.remove("reverseTransformAnimFromRight")
+  //     );
+  //   }
+  // }
 
   sectionsAnimations() {
     // this.clearAnimationClass("transformAnimFromLeft");
