@@ -610,9 +610,10 @@ body {
 .title__button-container {
     transform: translateX(-120%);
     animation-delay: .7s;
+    overflow: hidden;
 }
 
-.title-button {
+.title__button {
     margin-top: 5px;
     margin-left: 5%;
     padding: 8px 12px;
@@ -623,11 +624,15 @@ body {
     font-size: 0.8rem;
     font-family: 'Poppins';
     cursor: pointer;
-    transition: transform .2s ease-in;
+    transition: transform .3s ease-out;
 }
 
-.title-button:hover {
-    transform: translateY(-8%);
+.title__button:hover {
+    transform: translateY(-6%);
+}
+
+.title__button--hide {
+    transform: translateY(100%) !important;
 }
 
 .image-box {

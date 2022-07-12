@@ -20,7 +20,7 @@ export class ShowSection extends Common {
   }
 
   handleElements() {
-    this.sectionButtons = document.querySelectorAll(".title-button");
+    this.sectionButtons = document.querySelectorAll(".title__button");
     // this.sections = document.querySelectorAll("section");
     // this.navItems = document.querySelectorAll(".big__navigation-item");
     this.blackScreen = document.querySelector(".black__screen");
@@ -29,17 +29,11 @@ export class ShowSection extends Common {
   addListeners() {
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
-        console.log(
-          "button click window.location.hash.slice(1): " +
-            window.location.hash.slice(1)
-        );
         this.currentSectionIndex = e.target.dataset.currentSection;
         this.currentAnimationSectionIndex = this.currentSectionIndex;
         this.toggleSectionView(e);
         this.ChosenNavItemId = window.location.hash.slice(1);
-        console.log(
-          "window.location.hash: koniec button " + window.location.hash
-        );
+        this.buttonsAnimationToggle();
       })
     );
 
@@ -51,6 +45,7 @@ export class ShowSection extends Common {
         this.toggleSectionView(e);
         this.isButtonClicked = false;
       }
+      this.buttonsAnimationToggle();
     });
 
     this.navItems.forEach((item) => {
@@ -60,6 +55,7 @@ export class ShowSection extends Common {
         if (this.isButtonClicked) {
           this.toggleSectionView(e);
         }
+        this.buttonsAnimationToggle();
       });
     });
 
@@ -120,7 +116,11 @@ export class ShowSection extends Common {
     );
   }
 
-  buttonsAnimation() {}
+  buttonsAnimationToggle() {
+    this.sectionButtons.forEach((button) => {
+      button.classList.toggle("title__button--hide");
+    });
+  }
 
   // currentSectionIndexFunc() {
   //   this.sections.forEach((section, index) => {
