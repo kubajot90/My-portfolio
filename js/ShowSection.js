@@ -29,15 +29,25 @@ export class ShowSection extends Common {
   addListeners() {
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
+        console.log(
+          "button click window.location.hash.slice(1): " +
+            window.location.hash.slice(1)
+        );
         this.currentSectionIndex = e.target.dataset.currentSection;
         this.currentAnimationSectionIndex = this.currentSectionIndex;
         this.toggleSectionView(e);
+        this.ChosenNavItemId = window.location.hash.slice(1);
+        console.log(
+          "window.location.hash: koniec button " + window.location.hash
+        );
       })
     );
 
     window.addEventListener("popstate", (e) => {
       console.log("popstate2");
       if (this.isButtonClicked) {
+        console.log("warunek popstate2");
+        console.log("window.location.hash: " + window.location.hash);
         this.toggleSectionView(e);
         this.isButtonClicked = false;
       }
@@ -70,6 +80,8 @@ export class ShowSection extends Common {
   }
 
   toggleSectionView(e) {
+    console.log("togglesection------");
+
     this.isButtonClicked = !this.isButtonClicked;
     const sectionContainer = this.sections[
       this.currentSectionIndex
@@ -88,12 +100,15 @@ export class ShowSection extends Common {
     this.blackScreen.classList.toggle("black__screen--section-background");
 
     const id = this.sections[this.currentSectionIndex].getAttribute("id");
+    console.log("pushstate id: " + id);
     history.pushState(`${id}`, null, `#${id}`);
 
     if (!this.isButtonClicked) {
       this.showAllSections();
+
       window.location.hash = `#${this.ChosenNavItemId}`;
     }
+    console.log("window.location.hash: " + window.location.hash);
   }
 
   hideAllSections() {
@@ -104,6 +119,8 @@ export class ShowSection extends Common {
       section.classList.remove("hide-section")
     );
   }
+
+  buttonsAnimation() {}
 
   // currentSectionIndexFunc() {
   //   this.sections.forEach((section, index) => {
