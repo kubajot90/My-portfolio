@@ -79,19 +79,14 @@ export class Scroll extends Common {
     window.addEventListener("hashchange", () => {
       console.log("hashchange");
       this.changeCurrentSectionIndexByNav();
-      // console.log("cu sec index: " + this.currentSectionIndex);
-      // window.location.hash = `#${id}`;
       this.homePageAnimation();
       this.sectionsAnimations();
     });
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", () => {
-        console.log("nav1");
         const id = item.dataset.id;
-        // const section = document.querySelector(`#${id}`);
         history.pushState(`${id}`, null, `#${id}`);
-        // section.scrollIntoView({ behavior: "smooth" });
         window.location.hash = `#${id}`;
         this.changeCurrentSectionIndexByNav();
         this.homePageAnimation();
@@ -185,8 +180,6 @@ export class Scroll extends Common {
   // }
 
   sectionsAnimations() {
-    // this.clearAnimationClass("transformAnimFromLeft");
-    // console.log("sectionAnimation");
     const elements = document.querySelectorAll(
       `[data-section-${this.currentSectionIndex}]`
     );
@@ -220,14 +213,9 @@ export class Scroll extends Common {
         this.currentSectionIndex = index;
       }
     });
-    // console.log("cu sec by nav: " + this.currentSectionIndex);
   }
 
   blockScroll() {
-    console.log("block");
-    console.log(
-      "hide sect: " + document.getElementsByClassName("hide-section").length
-    );
     return document.getElementsByClassName("hide-section").length;
   }
 }

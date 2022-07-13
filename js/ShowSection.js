@@ -37,9 +37,8 @@ export class ShowSection extends Common {
         this.isSectionExpand = true;
         this.currentSectionIndex = e.target.dataset.currentSection;
         this.toggleSectionView(e);
-        this.injectSectionContent();
+        setTimeout(() => this.injectSectionContent(), 700);
         this.ChosenNavItemId = window.location.hash.slice(1);
-        // this.buttonsAnimationToggle();
         this.buttonsAnimationHide();
         this.sectionNumberAnimationToggle();
         this.scrollIconAnimationShow();
@@ -111,14 +110,11 @@ export class ShowSection extends Common {
 
     if (!document.querySelector(`[data-content-id="${currentSectionId}"]`)) {
       const xhr = new XMLHttpRequest();
-      // xhr.open("GET", "about-me.html", true);
+
       xhr.open("GET", `${currentSectionId}.html`, true);
       xhr.send();
 
       xhr.onload = function () {
-        // const CurrentSectionContainer = this.sections[
-        //   this.currentSectionIndex
-        // ].querySelector(".section__container");
         currentSectionContainer.dataset.contentId = `${currentSectionId}`;
         currentSectionContainer.insertAdjacentHTML(
           "beforeend",
@@ -131,6 +127,7 @@ export class ShowSection extends Common {
       );
       sectionContent.style.display = "flex";
     }
+    window.scrollTo(0, 0);
   }
 
   sectionContentHide() {
@@ -179,12 +176,6 @@ export class ShowSection extends Common {
     );
   }
 
-  // buttonsAnimationToggle() {
-  //   this.sectionButtons.forEach((button) =>
-  //     button.classList.toggle("title__button--hide")
-  //   );
-  // }
-
   buttonsAnimationShow() {
     this.sectionButtons.forEach((button) => {
       button.classList.remove("title__button--hide");
@@ -226,12 +217,4 @@ export class ShowSection extends Common {
   arrowAnimationHide() {
     this.arrow.classList.remove("arrow__left--show");
   }
-
-  // currentSectionIndexFunc() {
-  //   this.sections.forEach((section, index) => {
-  //     if (section.getAttribute("id") === window.location.hash.slice(1)) {
-  //       this.currentSectionIndex = index;
-  //     }
-  //   });
-  // }
 }

@@ -1,5 +1,6 @@
 export class NavAnimation {
   constructor() {
+    this.pageLogo = null;
     this.navEmailBtn = null;
     this.navPhoneBtn = null;
     this.navMailContainer = null;
@@ -21,6 +22,7 @@ export class NavAnimation {
   }
 
   handleElements() {
+    this.pageLogo = document.querySelector("[data-page-logo]");
     this.navEmailBtn = document.querySelector(".fa-envelope");
     this.navPhoneBtn = document.querySelector(".fa-mobile-screen-button");
     this.navMailContainer = document.querySelector(
@@ -42,6 +44,7 @@ export class NavAnimation {
   }
 
   addListeners() {
+    this.pageLogo.addEventListener("click", () => window.location.reload());
     this.navEmailBtn.addEventListener("click", () =>
       this.toggleClass(this.navMailContainer, "slide")
     );

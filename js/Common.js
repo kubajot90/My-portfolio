@@ -16,7 +16,6 @@ export class Common {
   };
 
   homePageAnimation() {
-    console.log("homePageAnimation");
     if (this.currentSectionIndex !== 0) {
       this.headerTitles.forEach((elm) =>
         elm.classList.add("reverseTransformFromLeft")
