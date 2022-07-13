@@ -29,12 +29,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* opacity: 0; */
     background-color: #020b16;
     z-index: 8;
     transition: transform .5s ease-out, opacity .5s ease-out;
-    /* transition: opacity  .5s ease-out; */
-   
 }
 
 .black__screen--show {
@@ -44,8 +41,62 @@ body {
 .black__screen--section-background {
     top:0;
     z-index: 1;
-    /* opacity: 1; */
     animation: opacityAnim 1s reverse ;
+}
+
+
+.arrow__box {
+    position: fixed;
+    top: 70px;
+    left: 2%;
+    padding: 5px 25px 5px 2px; 
+    z-index: 8;
+    transition: .4s ease-in-out;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.arrow__left {
+    top: 0;
+    left: 10%;
+    padding: 5px 25px 5px 2px; 
+    transform: translateX(300%);
+    transition: .5s ease-in-out .3s;
+   
+}
+
+.arrow__left--show {
+    top: 0;
+    left: 10%;
+    transform: translateX(0);
+}
+
+
+.arrow__left span:nth-child(1) {
+    display: block;
+    position: relative;
+    left: 4%;
+    width: 15px;
+    height: 15px;
+    border-left: white solid 1.5px;
+    border-bottom: white solid 1.5px;
+    transform: rotate(45deg)  ;
+}
+
+.arrow__left span:nth-child(2) {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 2%;
+    width: 40px;
+    height: 1px;
+    border: white solid 1px;
+    transform: translateY(-50%);
+    
+}
+
+.arrow__box:hover {
+   transform: translateX(-20%) 
 }
 
 .scroll__box {
@@ -55,6 +106,7 @@ body {
     justify-content: center;
     bottom: 11%;
     left: -4%;
+    z-index: 8;
     overflow: hidden;
     transform: rotate(90deg);
     animation: scrollDownIcon 3s infinite  ease-in-out;
@@ -80,6 +132,7 @@ body {
     transform: translateX(400%);
     animation: transformAnimFromLeft 1s ease-out both 1s;
 }
+
 
 .background__circles  {
     position: fixed;
@@ -728,6 +781,7 @@ body {
     right: -4%;
     z-index: 8;
     overflow: hidden;
+   
     
 }
 

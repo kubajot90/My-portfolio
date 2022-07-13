@@ -4,14 +4,17 @@ export class ShowSection extends Common {
   constructor() {
     super();
     this.isButtonClicked = false;
+    this.isSectionExpand = false;
     this.ChosenNavItemId = null;
     this.currentSectionIndex = null;
-    this.currentAnimationSectionIndex = null;
+    // this.currentAnimationSectionIndex = null;
 
     this.sectionButtons = null;
     // this.sections = null;
     // this.navItems = null;
     this.blackScreen = null;
+    this.scrollIcons = null;
+    this.arrow = null;
   }
 
   init() {
@@ -24,17 +27,22 @@ export class ShowSection extends Common {
     // this.sections = document.querySelectorAll("section");
     // this.navItems = document.querySelectorAll(".big__navigation-item");
     this.blackScreen = document.querySelector(".black__screen");
+    this.scrollIcons = document.querySelectorAll(".scroll__icon");
+    this.arrow = document.querySelector(".arrow__left");
   }
 
   addListeners() {
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
+        this.isSectionExpand = true;
         this.currentSectionIndex = e.target.dataset.currentSection;
-        this.currentAnimationSectionIndex = this.currentSectionIndex;
         this.toggleSectionView(e);
         this.ChosenNavItemId = window.location.hash.slice(1);
-        this.buttonsAnimationToggle();
+        // this.buttonsAnimationToggle();
+        this.buttonsAnimationHide();
         this.sectionNumberAnimationToggle();
+        this.scrollIconAnimationShow();
+        this.arrowAnimationShow();
       })
     );
 
@@ -46,8 +54,12 @@ export class ShowSection extends Common {
         this.toggleSectionView(e);
         this.isButtonClicked = false;
       }
-      this.buttonsAnimationToggle();
+      // this.buttonsAnimationToggle();
+      // this.buttonsAnimationHide();
       this.sectionNumberAnimationToggle();
+      this.scrollIconAnimationHide();
+      this.arrowAnimationHide();
+      this.isSectionExpand = false;
     });
 
     this.navItems.forEach((item) => {
@@ -57,9 +69,20 @@ export class ShowSection extends Common {
         if (this.isButtonClicked) {
           this.toggleSectionView(e);
         }
-        this.buttonsAnimationToggle();
-        // this.sectionNumberAnimationToggle();
+
+        // this.buttonsAnimationToggle();
+        this.buttonsAnimationShow();
+        this.isSectionExpand = false;
+
+        this.arrowAnimationHide();
       });
+    });
+
+    this.arrow.addEventListener("click", () => {
+      this.isSectionExpand = false;
+      this.arrowAnimationHide();
+      this.buttonsAnimationShow();
+      history.back();
     });
 
     // window.addEventListener("popstate", (e) => {
@@ -99,8 +122,11 @@ export class ShowSection extends Common {
     this.blackScreen.classList.toggle("black__screen--section-background");
 
     const id = this.sections[this.currentSectionIndex].getAttribute("id");
-    console.log("pushstate id: " + id);
-    history.pushState(`${id}`, null, `#${id}`);
+
+    if (!this.isSectionExpand) {
+      history.pushState(`${id}`, null, `#${id}`);
+      console.log("pushstate id: " + id);
+    }
 
     if (!this.isButtonClicked) {
       this.showAllSections();
@@ -119,9 +145,22 @@ export class ShowSection extends Common {
     );
   }
 
-  buttonsAnimationToggle() {
+  // buttonsAnimationToggle() {
+  //   this.sectionButtons.forEach((button) =>
+  //     button.classList.toggle("title__button--hide")
+  //   );
+  // }
+
+  buttonsAnimationShow() {
+    this.sectionButtons.forEach((button) => {
+      button.classList.remove("title__button--hide");
+      console.log("----------------------------------");
+    });
+  }
+
+  buttonsAnimationHide() {
     this.sectionButtons.forEach((button) =>
-      button.classList.toggle("title__button--hide")
+      button.classList.add("title__button--hide")
     );
   }
 
@@ -131,6 +170,28 @@ export class ShowSection extends Common {
     sectionNumbers.forEach((number) =>
       number.classList.toggle("transformAnimSections")
     );
+  }
+
+  scrollIconAnimationShow() {
+    this.scrollIcons.forEach((icon) => {
+      icon.style.animation = "transformAnimFromLeft .6s ease-out both .2s";
+      icon.classList.remove("reverseTransformFromLeft");
+    });
+  }
+
+  scrollIconAnimationHide() {
+    this.scrollIcons.forEach((icon) => {
+      icon.style.animation = "transformAnimFromLeft 1s ease-out both 1s";
+      icon.classList.add("reverseTransformFromLeft");
+    });
+  }
+
+  arrowAnimationShow() {
+    this.arrow.classList.add("arrow__left--show");
+  }
+
+  arrowAnimationHide() {
+    this.arrow.classList.remove("arrow__left--show");
   }
 
   // currentSectionIndexFunc() {
