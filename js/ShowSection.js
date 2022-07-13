@@ -37,6 +37,7 @@ export class ShowSection extends Common {
         this.isSectionExpand = true;
         this.currentSectionIndex = e.target.dataset.currentSection;
         this.toggleSectionView(e);
+        this.injectSectionContent();
         this.ChosenNavItemId = window.location.hash.slice(1);
         // this.buttonsAnimationToggle();
         this.buttonsAnimationHide();
@@ -49,8 +50,6 @@ export class ShowSection extends Common {
     window.addEventListener("popstate", (e) => {
       console.log("popstate2");
       if (this.isButtonClicked) {
-        console.log("warunek popstate2");
-        console.log("window.location.hash: " + window.location.hash);
         this.toggleSectionView(e);
         this.isButtonClicked = false;
       }
@@ -59,12 +58,13 @@ export class ShowSection extends Common {
       this.sectionNumberAnimationToggle();
       this.scrollIconAnimationHide();
       this.arrowAnimationHide();
+      this.buttonsAnimationShow();
       this.isSectionExpand = false;
+      this.sectionContentHide();
     });
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", (e) => {
-        console.log("nav2");
         this.ChosenNavItemId = item.dataset.id;
         if (this.isButtonClicked) {
           this.toggleSectionView(e);
@@ -75,6 +75,7 @@ export class ShowSection extends Common {
         this.isSectionExpand = false;
 
         this.arrowAnimationHide();
+        this.sectionContentHide();
       });
     });
 
@@ -82,6 +83,7 @@ export class ShowSection extends Common {
       this.isSectionExpand = false;
       this.arrowAnimationHide();
       this.buttonsAnimationShow();
+      this.sectionContentHide();
       history.back();
     });
 
@@ -101,9 +103,43 @@ export class ShowSection extends Common {
     // });
   }
 
-  toggleSectionView(e) {
-    console.log("togglesection------");
+  injectSectionContent() {
+    const currentSectionId = window.location.hash.slice(1);
+    const currentSectionContainer = this.sections[
+      this.currentSectionIndex
+    ].querySelector(".section__container");
 
+    if (!document.querySelector(`[data-content-id="${currentSectionId}"]`)) {
+      const xhr = new XMLHttpRequest();
+      // xhr.open("GET", "about-me.html", true);
+      xhr.open("GET", `${currentSectionId}.html`, true);
+      xhr.send();
+
+      xhr.onload = function () {
+        // const CurrentSectionContainer = this.sections[
+        //   this.currentSectionIndex
+        // ].querySelector(".section__container");
+        currentSectionContainer.dataset.contentId = `${currentSectionId}`;
+        currentSectionContainer.insertAdjacentHTML(
+          "beforeend",
+          this.responseText
+        );
+      };
+    } else {
+      const sectionContent = currentSectionContainer.querySelector(
+        ".section__container-content"
+      );
+      sectionContent.style.display = "flex";
+    }
+  }
+
+  sectionContentHide() {
+    document
+      .querySelectorAll(".section__container-content")
+      .forEach((element) => (element.style.display = "none"));
+  }
+
+  toggleSectionView(e) {
     this.isButtonClicked = !this.isButtonClicked;
     const sectionContainer = this.sections[
       this.currentSectionIndex
@@ -125,7 +161,6 @@ export class ShowSection extends Common {
 
     if (!this.isSectionExpand) {
       history.pushState(`${id}`, null, `#${id}`);
-      console.log("pushstate id: " + id);
     }
 
     if (!this.isButtonClicked) {
@@ -133,7 +168,6 @@ export class ShowSection extends Common {
 
       window.location.hash = `#${this.ChosenNavItemId}`;
     }
-    console.log("window.location.hash: " + window.location.hash);
   }
 
   hideAllSections() {
@@ -154,7 +188,6 @@ export class ShowSection extends Common {
   buttonsAnimationShow() {
     this.sectionButtons.forEach((button) => {
       button.classList.remove("title__button--hide");
-      console.log("----------------------------------");
     });
   }
 
@@ -202,9 +235,3 @@ export class ShowSection extends Common {
   //   });
   // }
 }
-
-//history.back() - dla strzłki do tyłu w sekcji.
-//zrób blokade wheel gdy jest pierwsza lub ostatnia sekcja.
-
-//history.back() - dla strzłki do tyłu w sekcji.
-//zrób blokade wheel gdy jest pierwsza lub ostatnia sekcja.
