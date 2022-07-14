@@ -736,6 +736,13 @@ body {
     transition: .4s;
     z-index: 2;
 }
+.image-box:hover {
+   transform: translateY(-.3%);
+}
+
+.image-box:hover ~ .section__number-box{
+   transform: scale(1.02);
+}
 
 .image-box--section-expand {
     height: 100%;
@@ -783,6 +790,7 @@ body {
     bottom: 7%;
     right: -4%;
     z-index: 8;
+    transition: .4s ease-out;
     overflow: hidden;
    
     
@@ -797,26 +805,64 @@ body {
     animation-delay: 1.1s;
 }
 
-.section__container-content {
+.section__content-box {
+    display: flex;
+    justify-content: center;
     background-color: #fff;
-    width: 100vw;
-    /* height: 100vh; */
-    /* position: absolute; */
-    /* flex-basis: 100%;
-    width: 100%; */
+    width: 100%;
     z-index: 99;
 }
 
-.image-test {
-    position: absolute;
-    background-image: url(/image/chmura.svg);
-    height: 600px;
+
+.content__about-me {
+    display: flex;
+    /* background-color:blue; */
+    margin: 10% 15%;
+
+}
+
+.section__content {
+    flex-basis: 50%;
+    /* margin: 10% 10%; */
+
+}
+
+.content__title {
+    
+    margin-bottom: 2%;
+    margin-top: -3px;
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: .5vw;
+    /* text-indent: 10px; */
+}
+
+.content__subtitle {
+    margin-bottom: 2%;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: .3vw;
+    /* text-indent: 10px; */
+}
+
+.content__text {
+    font-weight: 300;
+    color: #7e7e7e;
+    letter-spacing: 1px;
+}
+
+.content__image-box {
+    /* height: 100%; */
     width: 100%;
-    z-index: 999;
-    fill: #ff4d5a;
-    color: #ff4d5a;
- }
- 
+    height: 330px;
+    margin-top: 5%;
+    background-image: url(/image/Walesa.jpg);
+    /* background-position:center; */
+    background-size: cover;
+    /* box-shadow: 0 0 40px rgba(0, 0, 0, 0.067); */
+
+}
+
 
 .hide-section {
     display: none;

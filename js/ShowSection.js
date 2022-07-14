@@ -5,6 +5,7 @@ export class ShowSection extends Common {
     super();
     this.isButtonClicked = false;
     this.isSectionExpand = false;
+    this.isSectionNumberSlow = false;
     this.ChosenNavItemId = null;
     this.currentSectionIndex = null;
     // this.currentAnimationSectionIndex = null;
@@ -60,6 +61,7 @@ export class ShowSection extends Common {
       this.buttonsAnimationShow();
       this.isSectionExpand = false;
       this.sectionContentHide();
+      this.isSectionNumberSlow = false;
     });
 
     this.navItems.forEach((item) => {
@@ -75,6 +77,7 @@ export class ShowSection extends Common {
 
         this.arrowAnimationHide();
         this.sectionContentHide();
+        this.isSectionNumberSlow = false;
       });
     });
 
@@ -84,6 +87,7 @@ export class ShowSection extends Common {
       this.buttonsAnimationShow();
       this.sectionContentHide();
       history.back();
+      this.isSectionNumberSlow = true;
     });
 
     // window.addEventListener("popstate", (e) => {
@@ -123,7 +127,7 @@ export class ShowSection extends Common {
       };
     } else {
       const sectionContent = currentSectionContainer.querySelector(
-        ".section__container-content"
+        ".section__content-box"
       );
       sectionContent.style.display = "flex";
     }
@@ -132,7 +136,7 @@ export class ShowSection extends Common {
 
   sectionContentHide() {
     document
-      .querySelectorAll(".section__container-content")
+      .querySelectorAll(".section__content-box")
       .forEach((element) => (element.style.display = "none"));
   }
 
@@ -191,9 +195,14 @@ export class ShowSection extends Common {
   sectionNumberAnimationToggle() {
     const sectionNumbers = document.querySelectorAll(".section__number");
 
-    sectionNumbers.forEach((number) =>
-      number.classList.toggle("transformAnimSections")
-    );
+    sectionNumbers.forEach((number) => {
+      if (this.isSectionNumberSlow) {
+        number.style.animationDelay = ".01s";
+      } else {
+        number.style.animationDelay = "1.1s";
+      }
+      number.classList.toggle("transformAnimSections");
+    });
   }
 
   scrollIconAnimationShow() {
