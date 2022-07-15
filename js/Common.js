@@ -5,6 +5,7 @@ export class Common {
     this.clouds = this.htmlElements.clouds;
     this.main = this.htmlElements.main;
     this.navItems = this.htmlElements.navItems;
+    this.root = this.htmlElements.root;
   }
 
   htmlElements = {
@@ -13,6 +14,7 @@ export class Common {
     sections: document.querySelectorAll(".section"),
     headerTitles: document.querySelectorAll("[data-header-Animation]"),
     clouds: document.querySelectorAll(".header-Animation-from-right"),
+    root: document.querySelector(":root"),
   };
 
   homePageAnimation() {

@@ -1,5 +1,8 @@
-export class NavAnimation {
+import { Common } from "./Common.js";
+
+export class NavAnimation extends Common {
   constructor() {
+    super();
     this.pageLogo = null;
     this.navEmailBtn = null;
     this.navPhoneBtn = null;
@@ -10,7 +13,6 @@ export class NavAnimation {
     this.navBigLinks = null;
     this.xMark = null;
 
-    this.root = null;
     this.isToggledRoot = false;
 
     this.blackScreen = null;
@@ -35,8 +37,6 @@ export class NavAnimation {
     this.navBigItems = document.querySelectorAll(".big__navigation-item");
 
     this.xMark = document.querySelector(".navigation-x-mark");
-
-    this.root = document.querySelector(":root");
 
     this.blackScreen = document.querySelector(".black__screen");
 

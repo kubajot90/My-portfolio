@@ -16,6 +16,7 @@ export class ShowSection extends Common {
     this.blackScreen = null;
     this.scrollIcons = null;
     this.arrow = null;
+    this.sectionContentBox = null;
   }
 
   init() {
@@ -39,6 +40,9 @@ export class ShowSection extends Common {
         this.currentSectionIndex = e.target.dataset.currentSection;
         this.toggleSectionView(e);
         setTimeout(() => this.injectSectionContent(), 700);
+        // this.injectSectionContent();
+        // setTimeout(() => this.addObserver(), 1700);
+
         this.ChosenNavItemId = window.location.hash.slice(1);
         this.buttonsAnimationHide();
         this.sectionNumberAnimationToggle();
@@ -125,6 +129,7 @@ export class ShowSection extends Common {
           this.responseText
         );
       };
+      xhr.addEventListener("load", () => this.addObserver());
     } else {
       const sectionContent = currentSectionContainer.querySelector(
         ".section__content-box"
@@ -225,5 +230,24 @@ export class ShowSection extends Common {
 
   arrowAnimationHide() {
     this.arrow.classList.remove("arrow__left--show");
+  }
+
+  addObserver() {
+    this.sectionContentBox = document.querySelector(".section__container");
+    const observer = new IntersectionObserver((e) => this.changeNavColor(e));
+    observer.observe(this.sectionContentBox);
+  }
+
+  changeNavColor(e) {
+    const navElements = document.querySelectorAll(".main__navigation-link");
+
+    if (!e[0].isIntersecting) {
+      navElements.forEach((element) => (element.style.color = "black"));
+
+      this.root.style.setProperty("--xMarkColor", "black");
+    } else {
+      navElements.forEach((element) => (element.style.color = "white"));
+      this.root.style.setProperty("--xMarkColor", "white");
+    }
   }
 }
