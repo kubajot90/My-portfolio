@@ -79,8 +79,9 @@ body {
     left: 4%;
     width: 15px;
     height: 15px;
-    border-left: white solid 1.5px;
-    border-bottom: white solid 1.5px;
+    border-left: solid 1.5px;
+    border-bottom:  solid 1.5px;
+    border-color: white;
     transform: rotate(45deg)  ;
 }
 
@@ -91,7 +92,8 @@ body {
     left: 2%;
     width: 40px;
     height: 1px;
-    border: white solid 1px;
+    border: solid 1px;
+    border-color: white;
     transform: translateY(-50%);
     
 }
@@ -136,9 +138,11 @@ body {
 
 
 .background__circles  {
-    position: fixed;
-    top: 10%;
-    left: 58%;
+    position: absolute;
+    /* top: 10%;
+    left: 58%; */
+    top: 0;
+    left: 0;
    
 }
 
@@ -805,6 +809,7 @@ body {
 
 .section__content-box {
     display: flex;
+    /* position: relative; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -815,10 +820,50 @@ body {
 
 
 .content__about-me-who {
+    position: relative;
     display: flex;
-    /* background-color:blue; */
-    /* margin: 10% 15%; */
-    padding: 10% 15%;
+
+    /* padding: 10% 15%; */
+    /* padding: 15% 10% 0 10% */
+    padding: 12rem 10% 0 10%
+    
+}
+
+/* .content__number-box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 0;
+    top: 10%;
+    background-color: red;
+} */
+
+.content__number-p {
+    position: absolute;
+    display: flex;
+    left: 0;
+    top: 12.3rem;
+    align-items: center;
+    /* display: inline-block; */
+    /* position: absolute; */
+    /* display: block; */
+    font-size: 1.7rem;
+    font-weight: 600;
+    line-height: 100%;
+    color: var(--mainTextColor);
+    /* background-color: red; */
+ /* flex-basis: 40%; */
+}
+
+.content__number-p::before {
+    content: '';
+    display: inline-block;
+    /* display: block; */
+    /* position: absolute; */
+    width: 2.2vw;
+    height: 1.5px;
+    background-color: #000;
+    /* flex-basis: 40%; */
 
 }
 
@@ -866,11 +911,14 @@ body {
 
 .content__about-me-passion {
     display: flex;
+    position: relative;
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
-    padding: 0 15%;
+    /* padding: 0 15%; */
+    padding: 12rem 10% 0 10%;
 }
+
 .content__title-passion {
     flex-basis: 100%;
     justify-self: flex-start;
@@ -902,7 +950,7 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: .3vw;
-    /* text-indent: 10px; */
+    /* text-align: center; */
 }
 
 .content__text-passion {
@@ -912,8 +960,12 @@ body {
 }
 
 .content__about-me-technology {
-
+    position: relative;
+    width: 100%;
+    padding: 12rem 10% 0 10%
 }
+
+
 
 
 .hide-section {
