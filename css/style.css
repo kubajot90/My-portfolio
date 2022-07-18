@@ -1052,69 +1052,25 @@ body {
     animation: dotAnimation3 2s infinite linear forwards ;
 }
 
+.content__about-me-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 7rem 0;
+    margin-top: 8rem;
+    background-image: linear-gradient(101deg, #072142, #8c2b7a 52%, #ff4d5a);
+    color: white; 
+}
 
+.footer__mail {
 
+}
 
 .hide-section {
     display: none;
 }
 
-@keyframes dotAnimation1 {
- 
-    0% {
-        visibility: visible;
-    }
-    74% {
-        visibility: visible;
-    }
-    90% {
-        visibility: hidden;
-    } 
-    100% {
-        visibility: hidden;
-    } 
-}
-@keyframes dotAnimation2 {
-    0% {
-        visibility: hidden;
-    }
-    24% {
-        visibility: hidden;
-    }
-    25% {
-        visibility: visible;
-    }
-    74% {
-        visibility: visible;
-    }
-    90% {
-        visibility: hidden;
-    } 
-    100% {
-        visibility: hidden;
-    } 
-}
-@keyframes dotAnimation3 {
-    0% {
-        visibility: hidden;
-    }
-    49% {
-        visibility: hidden;
-    }
-    50% {
-        visibility: visible;
-    }
-    74% {
-        visibility: visible;
-    }
-    90% {
-        visibility: hidden;
-    } 
-    100% {
-        visibility: hidden;
-    } 
-   
-}
 
 
 @keyframes bigHoleAnimation {
@@ -1242,6 +1198,64 @@ body {
         transform: translateY(0)  rotate(90deg);
     }
 }
+
+@keyframes dotAnimation1 {
+ 
+    0% {
+        visibility: visible;
+    }
+    74% {
+        visibility: visible;
+    }
+    90% {
+        visibility: hidden;
+    } 
+    100% {
+        visibility: hidden;
+    } 
+}
+@keyframes dotAnimation2 {
+    0% {
+        visibility: hidden;
+    }
+    24% {
+        visibility: hidden;
+    }
+    25% {
+        visibility: visible;
+    }
+    74% {
+        visibility: visible;
+    }
+    90% {
+        visibility: hidden;
+    } 
+    100% {
+        visibility: hidden;
+    } 
+}
+@keyframes dotAnimation3 {
+    0% {
+        visibility: hidden;
+    }
+    49% {
+        visibility: hidden;
+    }
+    50% {
+        visibility: visible;
+    }
+    74% {
+        visibility: visible;
+    }
+    90% {
+        visibility: hidden;
+    } 
+    100% {
+        visibility: hidden;
+    } 
+   
+}
+
 
    
 
