@@ -235,11 +235,14 @@ export class ShowSection extends Common {
 
   changeNavColor(e) {
     console.log(e[0].isIntersecting);
-
-    if (!e[0].isIntersecting) {
-      this.setNavColor("black");
-    } else {
+    if (!this.isSectionExpand) {
       this.setNavColor("white");
+    } else {
+      if (!e[0].isIntersecting) {
+        this.setNavColor("black");
+      } else {
+        this.setNavColor("white");
+      }
     }
   }
 
