@@ -823,7 +823,7 @@ body {
 
 .section__content-box {
     display: flex;
-    /* position: relative; */
+    position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -911,10 +911,11 @@ body {
     letter-spacing: 1px;
 }
 
-.content__image-box {
+.content__who-image-box {
     /* height: 100%; */
     width: 100%;
-    height: 330px;
+    /* height: 330px; */
+    height: 21rem;
     margin-top: 5%;
     background-image: url(/image/Walesa.jpg);
     /* background-position:center; */
@@ -1065,14 +1066,70 @@ body {
 }
 
 
-.section__projects {
+/* .section__projects {
 
-}
+} */
 
 .projects__image {
     width: 100%;
     height: 100%;
     background-image: url('../image/cosmonaut.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.content__projects-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 23rem;
+    background-color: rgb(246, 246, 246);
+    z-index: -1;
+}
+
+.content__projects-header {
+    display: flex;
+    margin: 3.5rem;
+}
+
+.content__projects-header-box {
+    margin: 0 1.7rem;
+}
+
+.content__projects-subtitle {
+    margin-bottom: .3rem;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.content__text {
+font-size: .9rem;
+    
+}
+
+.content__text a {
+    text-decoration: none;
+    color: inherit;
+    transition: .2s;
+}
+
+.content__text a:hover {
+  color: #333;
+    
+}
+
+.content__projects-mockup {
+    width: 60%;
+    height: 27rem;
+ 
+}
+
+.content__projects-image-box {
+    width: 100%;
+    height: 100%;
+    background-image: url('/image/monitor2.png');
     background-position: center;
     background-size: cover;
 }
