@@ -17,6 +17,8 @@ export class ShowSection extends Common {
     this.scrollIcons = null;
     this.arrow = null;
     this.sectionContentBox = null;
+
+    this.observer = null;
   }
 
   init() {
@@ -36,6 +38,7 @@ export class ShowSection extends Common {
   addListeners() {
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
+        if (this.observer) this.observer.unobserve(this.sectionContentBox);
         this.isSectionExpand = true;
         this.currentSectionIndex = e.target.dataset.currentSection;
         this.toggleSectionView(e);
@@ -57,8 +60,7 @@ export class ShowSection extends Common {
         this.toggleSectionView(e);
         this.isButtonClicked = false;
       }
-      // this.buttonsAnimationToggle();
-      // this.buttonsAnimationHide();
+      this.isSectionNumberSlow = true;
       this.sectionNumberAnimationToggle();
       this.scrollIconAnimationHide();
       this.arrowAnimationHide();
@@ -74,11 +76,8 @@ export class ShowSection extends Common {
         if (this.isButtonClicked) {
           this.toggleSectionView(e);
         }
-
-        // this.buttonsAnimationToggle();
         this.buttonsAnimationShow();
         this.isSectionExpand = false;
-
         this.arrowAnimationHide();
         this.sectionContentHide();
         this.isSectionNumberSlow = false;
@@ -93,21 +92,6 @@ export class ShowSection extends Common {
       history.back();
       this.isSectionNumberSlow = true;
     });
-
-    // window.addEventListener("popstate", (e) => {
-    //   // const xhr = new XMLHttpRequest();
-    //   // xhr.open("GET", "about-me.html", true);
-    //   // xhr.send();
-
-    //   // xhr.onload = function () {
-    //   //   document
-    //   //     .querySelector(".section__container")
-    //   //     .insertAdjacentHTML("beforeend", this.responseText);
-
-    //   // };
-    //   console.log(e);
-    //   console.log(e.state);
-    // });
   }
 
   injectSectionContent() {
@@ -131,11 +115,13 @@ export class ShowSection extends Common {
       };
       xhr.addEventListener("load", () => this.addObserver());
     } else {
+      this.addObserver();
       const sectionContent = currentSectionContainer.querySelector(
         ".section__content-box"
       );
       sectionContent.style.display = "flex";
     }
+
     window.scrollTo(0, 0);
   }
 
@@ -233,21 +219,36 @@ export class ShowSection extends Common {
   }
 
   addObserver() {
-    this.sectionContentBox = document.querySelector(".section__container");
-    const observer = new IntersectionObserver((e) => this.changeNavColor(e));
-    observer.observe(this.sectionContentBox);
+    // if (this.observer) {
+    //   // this.observer.unobserve(this.sectionContentBox);
+    //   this.observer.disconnect();
+    //   console.log("dziala");
+    // }
+
+    this.sectionContentBox = this.sections[
+      this.currentSectionIndex
+    ].querySelector(".section__container");
+
+    this.observer = new IntersectionObserver((e) => this.changeNavColor(e));
+    this.observer.observe(this.sectionContentBox);
   }
 
   changeNavColor(e) {
-    const navElements = document.querySelectorAll(".main__navigation-link");
+    console.log(e[0].isIntersecting);
 
     if (!e[0].isIntersecting) {
-      navElements.forEach((element) => (element.style.color = "black"));
-
-      this.root.style.setProperty("--xMarkColor", "black");
+      this.setNavColor("black");
     } else {
-      navElements.forEach((element) => (element.style.color = "white"));
-      this.root.style.setProperty("--xMarkColor", "white");
+      this.setNavColor("white");
     }
+  }
+
+  setNavColor(color) {
+    const navElements = document.querySelectorAll(".main__navigation-link");
+    const arrowElements = document.querySelectorAll("[data-arrow]");
+
+    navElements.forEach((element) => (element.style.color = color));
+    arrowElements.forEach((element) => (element.style.borderColor = color));
+    this.root.style.setProperty("--xMarkColor", color);
   }
 }
