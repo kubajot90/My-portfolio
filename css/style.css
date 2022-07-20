@@ -1153,14 +1153,15 @@ font-size: 1rem;
 }
 
 .content__projects-back {
+    border: none;
+    background-color: transparent;
+    color: white;
     cursor: pointer;
     margin-bottom: 0;
-    transition: 1s steps(3,end) ;
+    transition: .3s ;
 }
 
-.content__projects-back:hover {
-    cursor: pointer;
-    transform: translateY(-80%);
+.content__projects-back:hover{
     color: rgb(148, 148, 148);
 }
 

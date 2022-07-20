@@ -8,11 +8,8 @@ export class ShowSection extends Common {
     this.isSectionNumberSlow = false;
     this.ChosenNavItemId = null;
     this.currentSectionIndex = null;
-    // this.currentAnimationSectionIndex = null;
 
     this.sectionButtons = null;
-    // this.sections = null;
-    // this.navItems = null;
     this.blackScreen = null;
     this.scrollIcons = null;
     this.arrow = null;
@@ -95,6 +92,7 @@ export class ShowSection extends Common {
   }
 
   injectSectionContent() {
+    console.log("injection");
     const currentSectionId = window.location.hash.slice(1);
     const currentSectionContainer = this.sections[
       this.currentSectionIndex
@@ -113,7 +111,10 @@ export class ShowSection extends Common {
           this.responseText
         );
       };
-      xhr.addEventListener("load", () => this.addObserver());
+      xhr.addEventListener("load", () => {
+        this.AddBackButtonListener();
+        this.addObserver();
+      });
     } else {
       this.addObserver();
       const sectionContent = currentSectionContainer.querySelector(
@@ -123,6 +124,23 @@ export class ShowSection extends Common {
     }
 
     window.scrollTo(0, 0);
+  }
+
+  AddBackButtonListener() {
+    const backButton = document.querySelector(".content__projects-back");
+    console.log("----backbutton");
+    console.log(backButton);
+
+    if (backButton) {
+      console.log("event click dziala-----------");
+      backButton.addEventListener("click", () => {
+        console.log("scrollto");
+        // window.scrollTo(0, 0);
+        this.sections[this.currentSectionIndex].scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+    }
   }
 
   sectionContentHide() {
