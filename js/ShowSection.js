@@ -25,8 +25,6 @@ export class ShowSection extends Common {
 
   handleElements() {
     this.sectionButtons = document.querySelectorAll(".title__button");
-    // this.sections = document.querySelectorAll("section");
-    // this.navItems = document.querySelectorAll(".big__navigation-item");
     this.blackScreen = document.querySelector(".black__screen");
     this.scrollIcons = document.querySelectorAll(".scroll__icon");
     this.arrow = document.querySelector(".arrow__left");
@@ -135,7 +133,6 @@ export class ShowSection extends Common {
       console.log("event click dziala-----------");
       backButton.addEventListener("click", () => {
         console.log("scrollto");
-        // window.scrollTo(0, 0);
         this.sections[this.currentSectionIndex].scrollIntoView({
           behavior: "smooth",
         });
@@ -237,12 +234,6 @@ export class ShowSection extends Common {
   }
 
   addObserver() {
-    // if (this.observer) {
-    //   // this.observer.unobserve(this.sectionContentBox);
-    //   this.observer.disconnect();
-    //   console.log("dziala");
-    // }
-
     this.sectionContentBox = this.sections[
       this.currentSectionIndex
     ].querySelector(".section__container");
