@@ -37,7 +37,7 @@ export class ShowSection extends Common {
         this.isSectionExpand = true;
         this.currentSectionIndex = e.target.dataset.currentSection;
         this.toggleSectionView(e);
-        setTimeout(() => this.injectSectionContent(), 700);
+        setTimeout(() => this.injectSectionContent(), 1100);
         // this.injectSectionContent();
         // setTimeout(() => this.addObserver(), 1700);
 
@@ -126,8 +126,6 @@ export class ShowSection extends Common {
 
   AddBackButtonListener() {
     const backButton = document.querySelector(".content__projects-back");
-    console.log("----backbutton");
-    console.log(backButton);
 
     if (backButton) {
       console.log("event click dziala-----------");
