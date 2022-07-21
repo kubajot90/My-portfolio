@@ -178,6 +178,7 @@ export class ShowSection extends Common {
   hideAllSections() {
     this.sections.forEach((section) => section.classList.add("hide-section"));
   }
+
   showAllSections() {
     this.sections.forEach((section) =>
       section.classList.remove("hide-section")

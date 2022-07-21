@@ -6,6 +6,7 @@ export class Common {
     this.main = this.htmlElements.main;
     this.navItems = this.htmlElements.navItems;
     this.root = this.htmlElements.root;
+    this.moon = this.htmlElements.moon;
   }
 
   htmlElements = {
@@ -15,23 +16,29 @@ export class Common {
     headerTitles: document.querySelectorAll("[data-header-Animation]"),
     clouds: document.querySelectorAll(".header-Animation-from-right"),
     root: document.querySelector(":root"),
+    moon: document.querySelector(".moon"),
   };
 
   homePageAnimation() {
     if (this.currentSectionIndex !== 0) {
+      this.moon.style.visibility = "hidden";
       this.headerTitles.forEach((elm) =>
         elm.classList.add("reverseTransformFromLeft")
       );
-      this.clouds.forEach((elm) =>
-        elm.classList.add("reverseTransformAnimFromRight")
-      );
+      this.clouds.forEach((elm) => {
+        elm.style.visibility = "hidden";
+        elm.classList.add("reverseTransformAnimFromRight");
+      });
     } else if (this.currentSectionIndex === 0) {
+      this.moon.style.visibility = "visible";
+
       this.headerTitles.forEach((elm) =>
         elm.classList.remove("reverseTransformFromLeft")
       );
-      this.clouds.forEach((elm) =>
-        elm.classList.remove("reverseTransformAnimFromRight")
-      );
+      this.clouds.forEach((elm) => {
+        elm.style.visibility = "visible";
+        elm.classList.remove("reverseTransformAnimFromRight");
+      });
     }
   }
 
