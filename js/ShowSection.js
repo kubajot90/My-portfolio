@@ -31,20 +31,13 @@ export class ShowSection extends Common {
   }
 
   addListeners() {
-    window.addEventListener("click", () => {
-      console.log("click");
-      this.sections[1].scrollIntoView({
-        behavior: "smooth",
-      });
-    });
-
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
         if (this.observer) this.observer.unobserve(this.sectionContentBox);
         this.isSectionExpand = true;
         this.currentSectionIndex = e.target.dataset.currentSection;
         this.toggleSectionView(e);
-        setTimeout(() => this.injectSectionContent(), 700);
+        setTimeout(() => this.injectSectionContent(), 1100);
         // this.injectSectionContent();
         // setTimeout(() => this.addObserver(), 1700);
 
@@ -133,8 +126,6 @@ export class ShowSection extends Common {
 
   AddBackButtonListener() {
     const backButton = document.querySelector(".content__projects-back");
-    console.log("----backbutton");
-    console.log(backButton);
 
     if (backButton) {
       console.log("event click dziala-----------");
