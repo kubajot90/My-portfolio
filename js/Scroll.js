@@ -199,7 +199,6 @@ export class Scroll extends Common {
       element.classList.add("transformAnimSections")
     );
     this.removeAnimationClass();
-    this.imageBoxAnimation();
   }
 
   removeAnimationClass() {
@@ -213,19 +212,6 @@ export class Scroll extends Common {
         element.classList.remove("transformAnimSections")
       );
     }, 500);
-  }
-
-  imageBoxAnimation() {
-    const imageBoxes = document.querySelectorAll(".image-box");
-    const currentImageBoxIndex = this.currentSectionIndex - 1;
-
-    imageBoxes.forEach((box, index) => {
-      if (index === currentImageBoxIndex) {
-        box.style.transform = "scale(1)";
-      } else {
-        box.style.transform = "scale(.8)";
-      }
-    });
   }
 
   changeCurrentSectionIndexByNav() {

@@ -653,11 +653,10 @@ body {
     position: relative;
     align-items: center;
     flex-wrap: wrap;
-    /* justify-content: space-between; */
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
-    margin-right: 8%; 
+    margin-right: 5%; 
     /* padding-left: 8%; */
     z-index: 8;
     transition: 1s;
@@ -671,14 +670,12 @@ body {
 
 .title-box {
     display: flex;
-    position: absolute;
     flex-direction: column;
     color: white;
     overflow: hidden;
-    z-index: 3;
-    left: 0;
-    margin-left: 8%;
-    /* margin: 0 auto; */
+    z-index: 1;
+    /* margin-left: 7%; */
+    margin: 0 auto;
 }
 
 .title-h1 {
@@ -691,12 +688,7 @@ body {
     text-shadow: 0 0 10px #00000082;
     transform: translateX(-100%);
     animation-delay: .5s;
-    text-shadow: 0 0 10px rgb(18, 12, 40);
 }
-/* #about-me .title-h1, #projects .title-h1 {
-    font-size: 7vw;
-    letter-spacing: .3rem;
-} */
 
 .transformAnimSections {
     animation: transformAnimFromLeft 1s ease-out forwards ;
@@ -708,11 +700,6 @@ body {
     flex-wrap: nowrap;
     transform: translateX(100%);
     animation-delay: .7s;
-    margin-top: .7rem;
-}
-#about-me .red-line-box {
-    
-    margin-top: 0;
 }
 
 .title-red-line {
@@ -854,12 +841,10 @@ letter-spacing: .1rem;
     height: 75%;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.207);
     overflow: hidden;
-    /* transition: .4s; */
-    transition: .6s .4s;
+    transition: .4s;
     z-index: 2;
     top: 0;
     left: 0;
-    transform: scale(.8);
 }
 .image-box:hover {
    transform: translateY(-.3%);
@@ -1290,6 +1275,26 @@ font-size: 1rem;
     background-size: cover;
 }
 
+/* .contact__mail {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 4rem;
+    font-size: 2.2rem;
+    letter-spacing: .2rem;
+} */
+/* .contact__phone {
+ 
+    margin-left: 4rem;
+    font-size: 2.4rem;
+    letter-spacing: .45rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+} */
+/* 
+.contact__icon {
+    margin-left: 4rem;
+    font-size: 1.5rem;
+} */
 
 .section__content-contact {
     display: flex;
