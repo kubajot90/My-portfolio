@@ -28,7 +28,15 @@ export class Scroll extends Common {
     this.addListeners();
     this.moveToSection(this.sections[0], "smooth");
     this.changeUrl.init();
+    // this.setWindowHeight();
   }
+
+  // setWindowHeight() {
+  //   const height = window.innerHeight;
+  //   const width = window.innerWidth;
+  //   this.root.style.setProperty("--hundredVh", `${height}px`);
+  //   this.root.style.setProperty("--hundredVw", `${width}px`);
+  // }
 
   // handleElements() {
   //   this.sections = document.querySelectorAll(".section");
@@ -136,14 +144,17 @@ export class Scroll extends Common {
   }
 
   sectionOnView(indexOfSection) {
+    console.log("sectionOnView");
     this.homePageAnimation();
-    setTimeout(() => {
-      // this.sections[indexOfSection].scrollIntoView({ behavior: "smooth" });
-      this.moveToSection(this.sections[indexOfSection], "smooth");
-    }, 200);
+    // setTimeout(() => {
+    //   this.moveToSection(this.sections[indexOfSection], "smooth");
+    // }, 200);
+    this.moveToSection(this.sections[indexOfSection], "smooth");
   }
 
   moveToSection(section, scrollBehavior) {
+    console.log("moveToSection");
+
     section.scrollIntoView({ behavior: scrollBehavior });
     this.changeUrl.changeUrl(section);
   }

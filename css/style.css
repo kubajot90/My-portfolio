@@ -4,6 +4,8 @@
     --transformPseudoBefore: rotate(0) translate3d(0, 0, 0);
     --transformPseudoAfter:   rotate(0) translate3d(0, 0, 0);
     --xMarkColor: white;
+    /* --hundredVh:0;
+    --hundredVw:0; */
 }
 
 * {
@@ -197,6 +199,8 @@ body {
 .main {
     width: 100vw;
     height: 100vh;
+    /* width:var(--hundredVw);
+    height: var(--hundredVh); */
     overflow-x: hidden;
     overflow-y: hidden;
     }
@@ -418,11 +422,13 @@ body {
     justify-content: center;
     height: 100vh;
     width: 100vw;
-   
+    /* height: var(--hundredVh);
+    width: var(--hundredVw); */
 }
 
 .section__header {
     position: relative;
+    background-color: red;
 }
 
 
@@ -638,10 +644,9 @@ body {
 .reverseTransformAnimFromRight {
     animation: reverseTransformAnimFromRight 1s ease-out forwards, reverseOpacityAnim 1s ease-out forwards !important;
 }
-/* .section__about-me {
-    display: flex;
-    justify-content: center;
-} */
+.section__about-me {
+   background-color: yellow;
+}
 
 .section__container {
     display: flex;

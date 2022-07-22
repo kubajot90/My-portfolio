@@ -31,6 +31,13 @@ export class ShowSection extends Common {
   }
 
   addListeners() {
+    window.addEventListener("click", () => {
+      console.log("click");
+      this.sections[1].scrollIntoView({
+        behavior: "smooth",
+      });
+    });
+
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
         if (this.observer) this.observer.unobserve(this.sectionContentBox);
