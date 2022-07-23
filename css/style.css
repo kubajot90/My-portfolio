@@ -41,7 +41,7 @@ body {
 
 .black__screen--section-background {
     top:0;
-    z-index: 1;
+    z-index: -1;
     animation: opacityAnim 1s reverse ;
 }
 
@@ -54,7 +54,7 @@ body {
     z-index: 9;
     transition: .4s ease-in-out;
     overflow: hidden;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .arrow__left {
@@ -63,7 +63,7 @@ body {
     padding: 5px 25px 5px 2px; 
     transform: translateX(300%);
     transition: .5s ease-in-out .3s;
-   
+   cursor: pointer;
 }
 
 .arrow__left--show {
@@ -99,7 +99,7 @@ body {
 }
 
 .arrow__box:hover {
-   transform: translateX(-20%) 
+   transform: translateX(-10%) 
 }
 
 .scroll__box {
@@ -203,6 +203,7 @@ body {
 
     .main--section-expand {
         overflow-y: visible;
+       
     }
 
 .big__navigation {
@@ -1302,7 +1303,21 @@ font-size: 1rem;
     display: none;
 }
 
+.section__header{
+    background-color:red;
+}
+.section__about-me{
+    background-color:green;
+}
+.section__projects{
+    background-color: yellow;
+}
+.section__contact{
+    background-color: pink;
+}
 
+
+/* czarna nav po klikniecu w contact w big nav */
 
 @keyframes bigHoleAnimation {
    0%{

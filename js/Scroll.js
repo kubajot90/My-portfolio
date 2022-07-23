@@ -93,12 +93,16 @@ export class Scroll extends Common {
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", () => {
+        // debugger;
         const id = item.dataset.id;
+        console.log("id:  " + id);
         history.pushState(`${id}`, null, `#${id}`);
+        console.log("window location hash");
         window.location.hash = `#${id}`;
         this.changeCurrentSectionIndexByNav();
         this.homePageAnimation();
         this.sectionsAnimations();
+        this.sections[this.currentSectionIndex].scrollIntoView();
       });
     });
   }
@@ -144,7 +148,6 @@ export class Scroll extends Common {
   }
 
   sectionOnView(indexOfSection) {
-    console.log("sectionOnView");
     this.homePageAnimation();
     // setTimeout(() => {
     //   this.moveToSection(this.sections[indexOfSection], "smooth");
@@ -170,25 +173,6 @@ export class Scroll extends Common {
     this.scrollDirection = 0;
     this.isTouch = false;
   }
-
-  // homePageAnimation() {
-  //   // console.log("homePageAnimation");
-  //   if (this.currentSectionIndex !== 0) {
-  //     this.headerTitles.forEach((elm) =>
-  //       elm.classList.add("reverseTransformFromLeft")
-  //     );
-  //     this.clouds.forEach((elm) =>
-  //       elm.classList.add("reverseTransformAnimFromRight")
-  //     );
-  //   } else if (this.currentSectionIndex === 0) {
-  //     this.headerTitles.forEach((elm) =>
-  //       elm.classList.remove("reverseTransformFromLeft")
-  //     );
-  //     this.clouds.forEach((elm) =>
-  //       elm.classList.remove("reverseTransformAnimFromRight")
-  //     );
-  //   }
-  // }
 
   sectionsAnimations() {
     const elements = document.querySelectorAll(
@@ -228,17 +212,13 @@ export class Scroll extends Common {
     });
   }
 
-  changeCurrentSectionIndexByNav() {
-    this.sections.forEach((section, index) => {
-      // if (section.getBoundingClientRect().y === 0) {
-      //   this.currentSectionIndex = index;
-      // }
-      // if (section.getAttribute("id") === this.changeUrl.state) {
-      if (section.getAttribute("id") === window.location.hash.slice(1)) {
-        this.currentSectionIndex = index;
-      }
-    });
-  }
+  // changeCurrentSectionIndexByNav() {
+  //   this.sections.forEach((section, index) => {
+  //     if (section.getAttribute("id") === window.location.hash.slice(1)) {
+  //       this.currentSectionIndex = index;
+  //     }
+  //   });
+  // }
 
   blockScroll() {
     return document.getElementsByClassName("hide-section").length;

@@ -6,7 +6,7 @@ export class ShowSection extends Common {
     this.isButtonClicked = false;
     this.isSectionExpand = false;
     this.isSectionNumberSlow = false;
-    this.ChosenNavItemId = null;
+    this.chosenNavItemId = null;
     this.currentSectionIndex = null;
 
     this.sectionButtons = null;
@@ -31,6 +31,11 @@ export class ShowSection extends Common {
   }
 
   addListeners() {
+    //   window.addEventListener("click", () => {
+    //     console.log("hash");
+    //     window.location.hash = `#contact`;
+    //   });
+
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
         if (this.observer) this.observer.unobserve(this.sectionContentBox);
@@ -41,7 +46,7 @@ export class ShowSection extends Common {
         // this.injectSectionContent();
         // setTimeout(() => this.addObserver(), 1700);
 
-        this.ChosenNavItemId = window.location.hash.slice(1);
+        this.chosenNavItemId = window.location.hash.slice(1);
         this.buttonsAnimationHide();
         this.sectionNumberAnimationToggle();
         this.scrollIconAnimationShow();
@@ -54,6 +59,7 @@ export class ShowSection extends Common {
       if (this.isButtonClicked) {
         this.toggleSectionView(e);
         this.isButtonClicked = false;
+        console.log("warunek1");
       }
       this.isSectionNumberSlow = true;
       this.sectionNumberAnimationToggle();
@@ -67,7 +73,8 @@ export class ShowSection extends Common {
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", (e) => {
-        this.ChosenNavItemId = item.dataset.id;
+        debugger;
+        this.chosenNavItemId = item.dataset.id;
         if (this.isButtonClicked) {
           this.toggleSectionView(e);
         }
@@ -90,7 +97,6 @@ export class ShowSection extends Common {
   }
 
   injectSectionContent() {
-    console.log("injection");
     const currentSectionId = window.location.hash.slice(1);
     const currentSectionContainer = this.sections[
       this.currentSectionIndex
@@ -128,9 +134,7 @@ export class ShowSection extends Common {
     const backButton = document.querySelector(".content__projects-back");
 
     if (backButton) {
-      console.log("event click dziala-----------");
       backButton.addEventListener("click", () => {
-        console.log("scrollto");
         this.sections[this.currentSectionIndex].scrollIntoView({
           behavior: "smooth",
         });
@@ -170,8 +174,11 @@ export class ShowSection extends Common {
 
     if (!this.isButtonClicked) {
       this.showAllSections();
-
-      window.location.hash = `#${this.ChosenNavItemId}`;
+      window.location.hash = `#${this.chosenNavItemId}`;
+      console.log("this.currentSectionIndex");
+      console.log(this.currentSectionIndex);
+      this.changeCurrentSectionIndexByNav();
+      this.sections[this.currentSectionIndex].scrollIntoView();
     }
   }
 
@@ -179,10 +186,11 @@ export class ShowSection extends Common {
     this.sections.forEach((section) => section.classList.add("hide-section"));
   }
 
-  showAllSections() {
+  showAllSections(e) {
     this.sections.forEach((section) =>
       section.classList.remove("hide-section")
     );
+    this.sections[this.currentSectionIndex].scrollIntoView();
   }
 
   buttonsAnimationShow() {
@@ -233,6 +241,7 @@ export class ShowSection extends Common {
   }
 
   addObserver() {
+    console.log("add observer");
     this.sectionContentBox = this.sections[
       this.currentSectionIndex
     ].querySelector(".section__container");
@@ -242,13 +251,18 @@ export class ShowSection extends Common {
   }
 
   changeNavColor(e) {
-    console.log(e[0].isIntersecting);
+    console.log("change nav color");
     if (!this.isSectionExpand) {
+      console.log("warunek 1");
       this.setNavColor("white");
     } else {
+      console.log("warunek 2");
+
       if (!e[0].isIntersecting) {
         this.setNavColor("black");
       } else {
+        console.log("warunek 3");
+
         this.setNavColor("white");
       }
     }

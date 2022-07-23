@@ -42,6 +42,14 @@ export class Common {
     }
   }
 
+  changeCurrentSectionIndexByNav() {
+    this.sections.forEach((section, index) => {
+      if (section.getAttribute("id") === window.location.hash.slice(1)) {
+        this.currentSectionIndex = index;
+      }
+    });
+  }
+
   // homePageAnimation() {
   //   if (this.currentSectionIndex !== 0) {
   //     this.headerTitles.forEach((elm) =>
