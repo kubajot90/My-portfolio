@@ -31,11 +31,6 @@ export class ShowSection extends Common {
   }
 
   addListeners() {
-    //   window.addEventListener("click", () => {
-    //     console.log("hash");
-    //     window.location.hash = `#contact`;
-    //   });
-
     this.sectionButtons.forEach((button) =>
       button.addEventListener("click", (e) => {
         if (this.observer) this.observer.unobserve(this.sectionContentBox);
@@ -59,7 +54,6 @@ export class ShowSection extends Common {
       if (this.isButtonClicked) {
         this.toggleSectionView(e);
         this.isButtonClicked = false;
-        console.log("warunek1");
       }
       this.isSectionNumberSlow = true;
       this.sectionNumberAnimationToggle();
@@ -73,7 +67,6 @@ export class ShowSection extends Common {
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", (e) => {
-        debugger;
         this.chosenNavItemId = item.dataset.id;
         if (this.isButtonClicked) {
           this.toggleSectionView(e);
@@ -175,8 +168,6 @@ export class ShowSection extends Common {
     if (!this.isButtonClicked) {
       this.showAllSections();
       window.location.hash = `#${this.chosenNavItemId}`;
-      console.log("this.currentSectionIndex");
-      console.log(this.currentSectionIndex);
       this.changeCurrentSectionIndexByNav();
       this.sections[this.currentSectionIndex].scrollIntoView();
     }
@@ -241,7 +232,6 @@ export class ShowSection extends Common {
   }
 
   addObserver() {
-    console.log("add observer");
     this.sectionContentBox = this.sections[
       this.currentSectionIndex
     ].querySelector(".section__container");
@@ -251,18 +241,12 @@ export class ShowSection extends Common {
   }
 
   changeNavColor(e) {
-    console.log("change nav color");
     if (!this.isSectionExpand) {
-      console.log("warunek 1");
       this.setNavColor("white");
     } else {
-      console.log("warunek 2");
-
       if (!e[0].isIntersecting) {
         this.setNavColor("black");
       } else {
-        console.log("warunek 3");
-
         this.setNavColor("white");
       }
     }

@@ -67,21 +67,25 @@ export class Scroll extends Common {
     });
 
     document.addEventListener("touchstart", (e) => {
-      if (!this.isScroll) {
-        this.checkIsScroll();
-        if (!this.blockScroll()) {
-          this.isTouch = true;
-          this.touchStart = e.touches[0].clientY;
-        }
+      console.log("touchstart");
+      // if (!this.isScroll) {
+      //   this.checkIsScroll();
+      if (!this.blockScroll()) {
+        this.isTouch = true;
+        this.touchStart = e.touches[0].clientY;
       }
+      // }
     });
     document.addEventListener("touchmove", (e) => {
+      console.log("touchmove");
       if (!this.isScroll) {
         this.checkIsScroll();
+        console.log("check is scroll");
         if (!this.blockScroll()) {
           this.checkTouch(e);
         }
       }
+      // debugger;
     });
 
     window.addEventListener("hashchange", () => {
@@ -95,9 +99,7 @@ export class Scroll extends Common {
       item.addEventListener("click", () => {
         // debugger;
         const id = item.dataset.id;
-        console.log("id:  " + id);
         history.pushState(`${id}`, null, `#${id}`);
-        console.log("window location hash");
         window.location.hash = `#${id}`;
         this.changeCurrentSectionIndexByNav();
         this.homePageAnimation();
@@ -124,7 +126,7 @@ export class Scroll extends Common {
     this.scrollDirection > 0
       ? this.currentSectionIndex--
       : this.currentSectionIndex++;
-
+    console.log("this.currentSectionIndex: " + this.currentSectionIndex);
     if (this.currentSectionIndex <= 0) {
       this.currentSectionIndex = 0;
     } else if (this.currentSectionIndex >= lengthOfSections - 1) {
@@ -156,14 +158,22 @@ export class Scroll extends Common {
   }
 
   moveToSection(section, scrollBehavior) {
-    console.log("moveToSection");
-
+    // debugger;
     section.scrollIntoView({ behavior: scrollBehavior });
     this.changeUrl.changeUrl(section);
+
+    console.log("move to section---------------");
+    console.log(section);
   }
 
   checkTouch(e) {
+    console.log("check touch");
     const touchPosition = e.touches[0].clientY;
+    console.log("touchStart" + this.touchStart);
+    console.log("touchPosition" + touchPosition);
+    console.log(
+      "this.touchStart - touchPosition" + (this.touchStart - touchPosition)
+    );
 
     this.touchStart - touchPosition > 0
       ? (this.scrollDirection = -1)
