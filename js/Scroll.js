@@ -135,7 +135,7 @@ export class Scroll extends Common {
 
     this.isTouch
       ? // ? this.sections[this.currentSectionIndex].scrollIntoView()
-        this.moveToSection(this.sections[this.currentSectionIndex], "auto")
+        this.moveToSection(this.sections[this.currentSectionIndex], "smooth")
       : this.sectionOnView(this.currentSectionIndex);
 
     this.sectionsAnimations();

@@ -1303,7 +1303,7 @@ font-size: 1rem;
     display: none;
 }
 
-.section__header{
+/* .section__header{
     background-color:red;
 }
 .section__about-me{
@@ -1314,7 +1314,7 @@ font-size: 1rem;
 }
 .section__contact{
     background-color: pink;
-}
+} */
 
 
 /* czarna nav po klikniecu w contact w big nav */
