@@ -50,6 +50,7 @@ export class Scroll extends Common {
 
   addListeners() {
     document.addEventListener("wheel", (e) => {
+      console.log("wheel");
       if (!this.isScroll) {
         this.checkIsScroll();
         if (!this.blockScroll()) {
@@ -66,27 +67,35 @@ export class Scroll extends Common {
       // }
     });
 
-    document.addEventListener("touchstart", (e) => {
-      console.log("touchstart");
-      // if (!this.isScroll) {
-      //   this.checkIsScroll();
-      if (!this.blockScroll()) {
-        this.isTouch = true;
-        this.touchStart = e.touches[0].clientY;
-      }
-      // }
-    });
-    document.addEventListener("touchmove", (e) => {
-      console.log("touchmove");
-      if (!this.isScroll) {
-        this.checkIsScroll();
-        console.log("check is scroll");
+    document.addEventListener(
+      "touchstart",
+      (e) => {
+        console.log("touchstart");
+        e.preventDefault();
+        // if (!this.isScroll) {
+        //   this.checkIsScroll();
         if (!this.blockScroll()) {
-          this.checkTouch(e);
+          this.isTouch = true;
+          this.touchStart = e.touches[0].clientY;
         }
-      }
-      // debugger;
-    });
+        // }
+      },
+      { passive: false }
+    );
+    document.addEventListener(
+      "touchmove",
+      (e) => {
+        console.log("touchmove");
+        e.preventDefault();
+        if (!this.isScroll) {
+          this.checkIsScroll();
+          if (!this.blockScroll()) {
+            this.checkTouch(e);
+          }
+        }
+      },
+      { passive: false }
+    );
 
     window.addEventListener("hashchange", () => {
       console.log("hashchange");
@@ -97,7 +106,6 @@ export class Scroll extends Common {
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", () => {
-        // debugger;
         const id = item.dataset.id;
         history.pushState(`${id}`, null, `#${id}`);
         window.location.hash = `#${id}`;
@@ -134,46 +142,43 @@ export class Scroll extends Common {
     }
 
     this.isTouch
-      ? // ? this.sections[this.currentSectionIndex].scrollIntoView()
-        this.moveToSection(this.sections[this.currentSectionIndex], "smooth")
+      ? this.moveToSection(this.sections[this.currentSectionIndex], "smooth")
       : this.sectionOnView(this.currentSectionIndex);
 
+    // if (this.isTouch) {
+    //   console.log("touch move to section");
+    //   console.log(this.sections[this.currentSectionIndex]);
+
+    //   this.sections[this.currentSectionIndex].scrollIntoView({
+    //     behavior: "smooth",
+    //   });
+    // } else {
+    //   this.sectionOnView(this.currentSectionIndex);
+    // }
+
     this.sectionsAnimations();
-    // this.homePageAnimation();
+    this.homePageAnimation();
   }
 
   checkIsScroll() {
     this.isScroll = true;
     setTimeout(() => {
       this.isScroll = false;
-    }, 1000);
+    }, 1500);
   }
 
   sectionOnView(indexOfSection) {
     this.homePageAnimation();
-    // setTimeout(() => {
-    //   this.moveToSection(this.sections[indexOfSection], "smooth");
-    // }, 200);
     this.moveToSection(this.sections[indexOfSection], "smooth");
   }
 
   moveToSection(section, scrollBehavior) {
-    // debugger;
     section.scrollIntoView({ behavior: scrollBehavior });
     this.changeUrl.changeUrl(section);
-
-    console.log("move to section---------------");
-    console.log(section);
   }
 
   checkTouch(e) {
-    console.log("check touch");
     const touchPosition = e.touches[0].clientY;
-    console.log("touchStart" + this.touchStart);
-    console.log("touchPosition" + touchPosition);
-    console.log(
-      "this.touchStart - touchPosition" + (this.touchStart - touchPosition)
-    );
 
     this.touchStart - touchPosition > 0
       ? (this.scrollDirection = -1)

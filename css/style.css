@@ -16,7 +16,7 @@ html {
     /* overflow: hidden; */
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; */
 }
 
 body {
@@ -650,8 +650,10 @@ body {
     flex-wrap: wrap;
     /* justify-content: space-between; */
     justify-content: flex-end;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
+    width: 100vw;
+    height: 100vh;
     margin-right: 8%; 
     /* padding-left: 8%; */
     z-index: 8;
@@ -1302,8 +1304,8 @@ font-size: 1rem;
 .hide-section {
     display: none;
 }
-
-/* .section__header{
+/* 
+.section__header{
     background-color:red;
 }
 .section__about-me{
