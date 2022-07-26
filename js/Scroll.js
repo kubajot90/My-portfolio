@@ -32,7 +32,9 @@ export class Scroll extends Common {
     // this.handleElements();
     this.addListeners();
     this.moveToSection(this.sections[0], "smooth");
+    // history.pushState(`header`, null, `#header`);
     this.changeUrl.init();
+
     // this.setWindowHeight();
   }
 
@@ -109,6 +111,7 @@ export class Scroll extends Common {
       this.homePageAnimation();
       this.sectionsAnimations();
       this.distance = 0;
+      // this.lastDistance = 0;
     });
 
     this.navItems.forEach((item) => {

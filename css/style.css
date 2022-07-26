@@ -1569,9 +1569,13 @@ font-size: 1rem;
       .technology__list {
         margin: 0;
       }
-      
+
       .fa-mobile-screen-button, .fa-envelope {
         display: none;
+      }
+
+      .big__navigation-list {
+        font-size: 9vh;
       }
 } 
 

@@ -79,6 +79,11 @@ export class ShowSection extends Common {
     this.toggleSectionView(e);
     setTimeout(() => this.injectSectionContent(), 1100);
     this.chosenNavItemId = window.location.hash.slice(1);
+    history.pushState(
+      `${this.chosenNavItemId}`,
+      null,
+      `#${this.chosenNavItemId}`
+    );
     this.buttonsAnimationHide();
     this.sectionNumberAnimationToggle();
     this.scrollIconAnimationShow();
@@ -102,6 +107,10 @@ export class ShowSection extends Common {
     this.buttonsAnimationShow();
     this.sectionContentHide();
     history.back();
+    // window.location.hash = `#${this.chosenNavItemId}`;
+    // this.sections[this.currentSectionIndex].scrollIntoView();
+    // debugger;
+
     this.isSectionNumberSlow = true;
   }
 
@@ -183,8 +192,6 @@ export class ShowSection extends Common {
 
     if (!this.isButtonClicked) {
       this.showAllSections();
-      console.log("chosennavitem----------");
-      console.log(this.chosenNavItemId);
       window.location.hash = `#${this.chosenNavItemId}`;
       this.changeCurrentSectionIndexByNav();
       this.sections[this.currentSectionIndex].scrollIntoView();
