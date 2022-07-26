@@ -57,9 +57,15 @@ export class ShowSection extends Common {
     });
 
     this.navItems.forEach((item) => {
-      this.chosenNavItemId = item.dataset.id;
-      item.addEventListener("click", (e) => this.navItemClickActions(e));
-      item.addEventListener("touchstart", (e) => this.navItemClickActions(e));
+      // this.chosenNavItemId = item.dataset.id;
+      item.addEventListener("click", (e) => {
+        this.chosenNavItemId = item.dataset.id;
+        this.navItemClickActions(e);
+      });
+      item.addEventListener("touchstart", (e) => {
+        this.chosenNavItemId = item.dataset.id;
+        this.navItemClickActions(e);
+      });
     });
 
     this.arrow.addEventListener("click", () => this.arrowClickActions());
@@ -177,6 +183,8 @@ export class ShowSection extends Common {
 
     if (!this.isButtonClicked) {
       this.showAllSections();
+      console.log("chosennavitem----------");
+      console.log(this.chosenNavItemId);
       window.location.hash = `#${this.chosenNavItemId}`;
       this.changeCurrentSectionIndexByNav();
       this.sections[this.currentSectionIndex].scrollIntoView();

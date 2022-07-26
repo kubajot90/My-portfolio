@@ -46,6 +46,7 @@ export class Common {
     this.sections.forEach((section, index) => {
       if (section.getAttribute("id") === window.location.hash.slice(1)) {
         this.currentSectionIndex = index;
+        console.log("section index:   " + this.currentSectionIndex);
       }
     });
   }

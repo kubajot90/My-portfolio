@@ -112,10 +112,14 @@ export class Scroll extends Common {
     });
 
     this.navItems.forEach((item) => {
-      item.addEventListener("click", () => this.navItemsClickActions(item));
-      item.addEventListener("touchstart", () =>
-        this.navItemsClickActions(item)
-      );
+      item.addEventListener("click", () => {
+        console.log("click");
+        this.navItemsClickActions(item);
+      });
+      item.addEventListener("touchstart", () => {
+        console.log("touch");
+        this.navItemsClickActions(item);
+      });
     });
   }
 
@@ -135,12 +139,19 @@ export class Scroll extends Common {
 
   navItemsClickActions(item) {
     const id = item.dataset.id;
+    console.log("--------------id");
+    console.log(id);
     history.pushState(`${id}`, null, `#${id}`);
     window.location.hash = `#${id}`;
     this.changeCurrentSectionIndexByNav();
     this.homePageAnimation();
     this.sectionsAnimations();
+
     this.sections[this.currentSectionIndex].scrollIntoView();
+    console.log("scroll");
+    console.log(window.location.hash);
+
+    // debugger;
   }
 
   setCurrentSectionIndex(e) {

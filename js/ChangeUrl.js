@@ -11,6 +11,7 @@ export class ChangeUrl extends Common {
 
   addListeners() {
     window.addEventListener("popstate", (e) => {
+      console.log(window.location.hash);
       const section = document.getElementById(
         `${window.location.hash.slice(1)}`
       );
