@@ -9,9 +9,14 @@ export class Scroll extends Common {
     this.isScroll = false;
     this.isWheel = false;
 
-    this.touchStart = null;
+    this.touchStart = 0;
+    this.touchPosition = null;
     this.scrollDirection = null;
     this.isTouch = false;
+
+    this.contentBox = null;
+    this.distance = 0;
+    this.lastDistance = 0;
 
     // this.headerTitles = null;
     // this.clouds = null;
@@ -71,22 +76,23 @@ export class Scroll extends Common {
       "touchstart",
       (e) => {
         console.log("touchstart");
-        e.preventDefault();
-        // if (!this.isScroll) {
-        //   this.checkIsScroll();
+        this.lastDistance = this.distance;
+        this.touchStart = e.touches[0].clientY;
         if (!this.blockScroll()) {
           this.isTouch = true;
-          this.touchStart = e.touches[0].clientY;
+          // this.touchStart = e.touches[0].clientY;
         }
-        // }
+        e.preventDefault();
       },
       { passive: false }
     );
+
     document.addEventListener(
       "touchmove",
       (e) => {
-        console.log("touchmove");
+        this.touchPosition = e.touches[0].clientY;
         e.preventDefault();
+        this.scrollSectionByTouch();
         if (!this.isScroll) {
           this.checkIsScroll();
           if (!this.blockScroll()) {
@@ -102,19 +108,39 @@ export class Scroll extends Common {
       this.changeCurrentSectionIndexByNav();
       this.homePageAnimation();
       this.sectionsAnimations();
+      this.distance = 0;
     });
 
     this.navItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        const id = item.dataset.id;
-        history.pushState(`${id}`, null, `#${id}`);
-        window.location.hash = `#${id}`;
-        this.changeCurrentSectionIndexByNav();
-        this.homePageAnimation();
-        this.sectionsAnimations();
-        this.sections[this.currentSectionIndex].scrollIntoView();
-      });
+      item.addEventListener("click", () => this.navItemsClickActions(item));
+      item.addEventListener("touchstart", () =>
+        this.navItemsClickActions(item)
+      );
     });
+  }
+
+  scrollSectionByTouch() {
+    this.distance = this.lastDistance + (this.touchStart - this.touchPosition);
+
+    const contentBox = this.sections[this.currentSectionIndex].querySelector(
+      ".section__container--section-expand"
+    );
+
+    if (contentBox) {
+      document
+        .querySelector(".main--section-expand")
+        .scrollTo(0, this.distance);
+    }
+  }
+
+  navItemsClickActions(item) {
+    const id = item.dataset.id;
+    history.pushState(`${id}`, null, `#${id}`);
+    window.location.hash = `#${id}`;
+    this.changeCurrentSectionIndexByNav();
+    this.homePageAnimation();
+    this.sectionsAnimations();
+    this.sections[this.currentSectionIndex].scrollIntoView();
   }
 
   setCurrentSectionIndex(e) {
@@ -134,7 +160,7 @@ export class Scroll extends Common {
     this.scrollDirection > 0
       ? this.currentSectionIndex--
       : this.currentSectionIndex++;
-    console.log("this.currentSectionIndex: " + this.currentSectionIndex);
+    // console.log("this.currentSectionIndex: " + this.currentSectionIndex);
     if (this.currentSectionIndex <= 0) {
       this.currentSectionIndex = 0;
     } else if (this.currentSectionIndex >= lengthOfSections - 1) {

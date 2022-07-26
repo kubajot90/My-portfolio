@@ -31,23 +31,14 @@ export class ShowSection extends Common {
   }
 
   addListeners() {
-    this.sectionButtons.forEach((button) =>
+    this.sectionButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
-        if (this.observer) this.observer.unobserve(this.sectionContentBox);
-        this.isSectionExpand = true;
-        this.currentSectionIndex = e.target.dataset.currentSection;
-        this.toggleSectionView(e);
-        setTimeout(() => this.injectSectionContent(), 1100);
-        // this.injectSectionContent();
-        // setTimeout(() => this.addObserver(), 1700);
-
-        this.chosenNavItemId = window.location.hash.slice(1);
-        this.buttonsAnimationHide();
-        this.sectionNumberAnimationToggle();
-        this.scrollIconAnimationShow();
-        this.arrowAnimationShow();
-      })
-    );
+        this.buttonClickActions(e);
+      });
+      button.addEventListener("touchstart", (e) => {
+        this.buttonClickActions(e);
+      });
+    });
 
     window.addEventListener("popstate", (e) => {
       console.log("popstate2");
@@ -66,27 +57,46 @@ export class ShowSection extends Common {
     });
 
     this.navItems.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        this.chosenNavItemId = item.dataset.id;
-        if (this.isButtonClicked) {
-          this.toggleSectionView(e);
-        }
-        this.buttonsAnimationShow();
-        this.isSectionExpand = false;
-        this.arrowAnimationHide();
-        this.sectionContentHide();
-        this.isSectionNumberSlow = false;
-      });
+      this.chosenNavItemId = item.dataset.id;
+      item.addEventListener("click", (e) => this.navItemClickActions(e));
+      item.addEventListener("touchstart", (e) => this.navItemClickActions(e));
     });
 
-    this.arrow.addEventListener("click", () => {
-      this.isSectionExpand = false;
-      this.arrowAnimationHide();
-      this.buttonsAnimationShow();
-      this.sectionContentHide();
-      history.back();
-      this.isSectionNumberSlow = true;
-    });
+    this.arrow.addEventListener("click", () => this.arrowClickActions());
+    this.arrow.addEventListener("touchstart", () => this.arrowClickActions());
+  }
+
+  buttonClickActions(e) {
+    if (this.observer) this.observer.unobserve(this.sectionContentBox);
+    this.isSectionExpand = true;
+    this.currentSectionIndex = e.target.dataset.currentSection;
+    this.toggleSectionView(e);
+    setTimeout(() => this.injectSectionContent(), 1100);
+    this.chosenNavItemId = window.location.hash.slice(1);
+    this.buttonsAnimationHide();
+    this.sectionNumberAnimationToggle();
+    this.scrollIconAnimationShow();
+    this.arrowAnimationShow();
+  }
+
+  navItemClickActions(e) {
+    if (this.isButtonClicked) {
+      this.toggleSectionView(e);
+    }
+    this.buttonsAnimationShow();
+    this.isSectionExpand = false;
+    this.arrowAnimationHide();
+    this.sectionContentHide();
+    this.isSectionNumberSlow = false;
+  }
+
+  arrowClickActions() {
+    this.isSectionExpand = false;
+    this.arrowAnimationHide();
+    this.buttonsAnimationShow();
+    this.sectionContentHide();
+    history.back();
+    this.isSectionNumberSlow = true;
   }
 
   injectSectionContent() {

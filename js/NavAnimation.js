@@ -45,22 +45,29 @@ export class NavAnimation extends Common {
 
   addListeners() {
     this.pageLogo.addEventListener("click", () => window.location.reload());
+    this.pageLogo.addEventListener("touchstart", () =>
+      window.location.reload()
+    );
     this.navEmailBtn.addEventListener("click", () =>
       this.toggleClass(this.navMailContainer, "slide")
     );
     this.navPhoneBtn.addEventListener("click", () =>
       this.toggleClass(this.navPhoneContainer, "slide")
     );
-    this.xMark.addEventListener("click", () => {
-      this.toggleClass(this.navBig, "big__navigation--slide");
-      this.toggleRootProperty();
-      this.blackScreenShow();
-      this.navBigLinksAnimation();
-    });
+    this.xMark.addEventListener("click", () => this.xMarkClickAction());
+    this.xMark.addEventListener("touchstart", () => this.xMarkClickAction());
 
-    this.navBigItems.forEach((item) =>
-      item.addEventListener("click", () => this.bigNavSlide())
-    );
+    this.navBigItems.forEach((item) => {
+      item.addEventListener("click", () => this.bigNavSlide());
+      item.addEventListener("touchstart", () => this.bigNavSlide());
+    });
+  }
+
+  xMarkClickAction() {
+    this.toggleClass(this.navBig, "big__navigation--slide");
+    this.toggleRootProperty();
+    this.blackScreenShow();
+    this.navBigLinksAnimation();
   }
 
   toggleClass(element, toggleClass) {
