@@ -1566,8 +1566,12 @@ font-size: 1rem;
         height: 8rem;
       }
 
-      .image-box {
-        width: 100%;
+      .technology__list {
+        margin: 0;
+      }
+      
+      .fa-mobile-screen-button, .fa-envelope {
+        display: none;
       }
 } 
 
