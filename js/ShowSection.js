@@ -181,7 +181,11 @@ export class ShowSection extends Common {
 
     this.main.classList.toggle("main--section-expand");
     sectionContainer.classList.toggle("section__container--section-expand");
-    imageBox.classList.toggle("image-box--section-expand");
+    console.log(window.innerWidth);
+    window.innerWidth > 768
+      ? imageBox.classList.toggle("image-box--section-expand")
+      : imageBox.classList.toggle("image-box--section-expand-mobile");
+    // imageBox.classList.toggle("image-box--section-expand");
     this.blackScreen.classList.toggle("black__screen--section-background");
 
     const id = this.sections[this.currentSectionIndex].getAttribute("id");

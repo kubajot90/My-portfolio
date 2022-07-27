@@ -18,6 +18,8 @@ export class Scroll extends Common {
     this.distance = 0;
     this.lastDistance = 0;
 
+    this.sectionContainer = null;
+
     // this.headerTitles = null;
     // this.clouds = null;
 
@@ -29,31 +31,10 @@ export class Scroll extends Common {
   }
 
   init() {
-    // this.handleElements();
     this.addListeners();
     this.moveToSection(this.sections[0], "smooth");
-    // history.pushState(`header`, null, `#header`);
     this.changeUrl.init();
-
-    // this.setWindowHeight();
   }
-
-  // setWindowHeight() {
-  //   const height = window.innerHeight;
-  //   const width = window.innerWidth;
-  //   this.root.style.setProperty("--hundredVh", `${height}px`);
-  //   this.root.style.setProperty("--hundredVw", `${width}px`);
-  // }
-
-  // handleElements() {
-  //   this.sections = document.querySelectorAll(".section");
-  //   this.headerTitles = document.querySelectorAll(
-  //     "[data-header-Animation]"
-  //   );
-  //   this.clouds = document.querySelectorAll(".header-Animation-from-right");
-  //   this.main = document.querySelector(".main");
-  //   this.navItems = document.querySelectorAll(".big__navigation-item");
-  // }
 
   addListeners() {
     document.addEventListener("wheel", (e) => {
@@ -66,12 +47,6 @@ export class Scroll extends Common {
           this.isWheel = false;
         }
       }
-
-      // if (!this.blockScroll()) {
-      //   this.isWheel = true;
-      //   this.setCurrentSectionIndex(e);
-      //   this.isWheel = false;
-      // }
     });
 
     document.addEventListener(
@@ -82,7 +57,6 @@ export class Scroll extends Common {
         this.touchStart = e.touches[0].clientY;
         if (!this.blockScroll()) {
           this.isTouch = true;
-          // this.touchStart = e.touches[0].clientY;
         }
         e.preventDefault();
       },
@@ -110,40 +84,44 @@ export class Scroll extends Common {
       this.changeCurrentSectionIndexByNav();
       this.homePageAnimation();
       this.sectionsAnimations();
-      this.distance = 0;
-      // this.lastDistance = 0;
     });
 
     this.navItems.forEach((item) => {
       item.addEventListener("click", () => {
-        console.log("click");
         this.navItemsClickActions(item);
       });
       item.addEventListener("touchstart", () => {
-        console.log("touch");
         this.navItemsClickActions(item);
       });
     });
   }
+  resetDistance() {
+    const observer = new MutationObserver(() => {
+      this.distance = 0;
+    });
+    observer.observe(this.sectionContainer, { attributes: true });
+  }
 
   scrollSectionByTouch() {
-    this.distance = this.lastDistance + (this.touchStart - this.touchPosition);
-
-    const contentBox = this.sections[this.currentSectionIndex].querySelector(
+    this.contentBox = this.sections[this.currentSectionIndex].querySelector(
       ".section__container--section-expand"
     );
+    this.sectionContainer = this.sections[
+      this.currentSectionIndex
+    ].querySelector(".section__container");
 
-    if (contentBox) {
+    if (this.contentBox) {
+      this.distance =
+        this.lastDistance + (this.touchStart - this.touchPosition);
       document
         .querySelector(".main--section-expand")
         .scrollTo(0, this.distance);
+      this.resetDistance();
     }
   }
 
   navItemsClickActions(item) {
     const id = item.dataset.id;
-    console.log("--------------id");
-    console.log(id);
     history.pushState(`${id}`, null, `#${id}`);
     window.location.hash = `#${id}`;
     this.changeCurrentSectionIndexByNav();
@@ -151,10 +129,6 @@ export class Scroll extends Common {
     this.sectionsAnimations();
 
     this.sections[this.currentSectionIndex].scrollIntoView();
-    console.log("scroll");
-    console.log(window.location.hash);
-
-    // debugger;
   }
 
   setCurrentSectionIndex(e) {
@@ -164,17 +138,10 @@ export class Scroll extends Common {
       ? (this.scrollDirection = e.wheelDelta)
       : (this.scrollDirection = this.scrollDirection);
 
-    // if (!this.isScroll) {
-    //   this.checkIsScroll();
-    //   this.scrollDirection > 0
-    //     ? this.currentSectionIndex--
-    //     : this.currentSectionIndex++;
-    // }
-
     this.scrollDirection > 0
       ? this.currentSectionIndex--
       : this.currentSectionIndex++;
-    // console.log("this.currentSectionIndex: " + this.currentSectionIndex);
+
     if (this.currentSectionIndex <= 0) {
       this.currentSectionIndex = 0;
     } else if (this.currentSectionIndex >= lengthOfSections - 1) {
@@ -184,17 +151,6 @@ export class Scroll extends Common {
     this.isTouch
       ? this.moveToSection(this.sections[this.currentSectionIndex], "smooth")
       : this.sectionOnView(this.currentSectionIndex);
-
-    // if (this.isTouch) {
-    //   console.log("touch move to section");
-    //   console.log(this.sections[this.currentSectionIndex]);
-
-    //   this.sections[this.currentSectionIndex].scrollIntoView({
-    //     behavior: "smooth",
-    //   });
-    // } else {
-    //   this.sectionOnView(this.currentSectionIndex);
-    // }
 
     this.sectionsAnimations();
     this.homePageAnimation();
@@ -266,14 +222,6 @@ export class Scroll extends Common {
       }
     });
   }
-
-  // changeCurrentSectionIndexByNav() {
-  //   this.sections.forEach((section, index) => {
-  //     if (section.getAttribute("id") === window.location.hash.slice(1)) {
-  //       this.currentSectionIndex = index;
-  //     }
-  //   });
-  // }
 
   blockScroll() {
     return document.getElementsByClassName("hide-section").length;
