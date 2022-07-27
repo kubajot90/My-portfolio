@@ -525,7 +525,7 @@ body {
     font-weight: 800;
     z-index: 7;
     /* animation: transformAnimFromRight 1s ease-out reverse .4s, opacityAnim 1s ease-out reverse .8s; */
-    animation: transformAnimFromRight 1s ease-out reverse .3s, opacityAnim 1s ease-out reverse   ;
+    animation: transformAnimFromRight 1s ease-out reverse , opacityAnim 1s ease-out reverse   ;
 }
 
  .header__title {
@@ -615,7 +615,7 @@ body {
     z-index: -1;
     /* transform: translateX(100vh) ; */
     /* animation: transformAnimFromRight 1s ease-out reverse .4s, opacityAnim 1s ease-out reverse .8s; */
-    animation: transformAnimFromRight 1s ease-out reverse .3s, opacityAnim 1s ease-out reverse ;
+    animation: transformAnimFromRight 1s ease-out reverse , opacityAnim 1s ease-out reverse ;
 }
 
 .section__header .cloud__vector:nth-child(2){
@@ -623,28 +623,28 @@ body {
     left: -38%;
     z-index: -1;
     /* animation: transformAnimFromRight 1s ease-out reverse .4s, opacityAnim 1s ease-out reverse .8s; */
-    animation: transformAnimFromRight 1s ease-out reverse .3s, opacityAnim 1s ease-out reverse ;
+    animation: transformAnimFromRight 1s ease-out reverse , opacityAnim 1s ease-out reverse ;
 }
 
 .section__header .cloud__vector:nth-child(3){
     top: 0;
     left: 69%;
     /* animation: transformAnimFromRight 1s ease-out reverse .8s, opacityAnim 1s ease-out reverse .8s; */
-    animation: transformAnimFromRight 1s ease-out reverse .3s, opacityAnim 1s ease-out reverse ;  
+    animation: transformAnimFromRight 1s ease-out reverse , opacityAnim 1s ease-out reverse ;  
 }
 
 .section__header .cloud__vector:nth-child(4){
    top: 44%;
     left: -45%;
     /* animation: transformAnimFromRight 1s ease-out reverse .8s, opacityAnim 1s ease-out reverse .8s; */
-    animation: transformAnimFromRight 1.1s ease-out reverse .3s, opacityAnim 1.1s ease-out reverse ;
+    animation: transformAnimFromRight 1.1s ease-out reverse , opacityAnim 1.1s ease-out reverse ;
 }
 
 .section__header .cloud__vector:nth-child(5){
     top:56%;
     left: 47%;
     /* animation: transformAnimFromRight 1s ease-out reverse .6s, opacityAnim 1s ease-out reverse .8s; */
-    animation: transformAnimFromRight 1.1s ease-out reverse .3s, opacityAnim 1.1s ease-out reverse  ;
+    animation: transformAnimFromRight 1.1s ease-out reverse , opacityAnim 1.1s ease-out reverse  ;
   
 }
 
@@ -1295,9 +1295,6 @@ font-size: 1rem;
     color: rgb(148, 148, 148);
 }
 
-.section__contact {
-
-}
 
 .contact__image {
     width: 100%;
@@ -1530,20 +1527,9 @@ font-size: 1rem;
         font-size: 13px;
     }
 
-    .header__moon-container {
-        /* position: fixed;
-        left: 80%;
-        top: 50%;
-        display: flex;
-        transform: translate(-50%,-50%); */
-        /* transform: translateX(-49%); */
-    }
 
     .header__title {
        left: 10%;
-        /* left: 50%;
-        top: 60%;
-        transform: translateX(-50%); */
       }
 }
 
@@ -1558,14 +1544,6 @@ font-size: 1rem;
         left: -14%;
     }
 
-    .header__moon-container {
-  
-    }
-
-    .header__title {
-       
-      }
-
       .content__about-me-who, .content__about-me-passion, .content__projects-header, .content__projects-description {
         flex-direction: column;
       }
@@ -1573,6 +1551,7 @@ font-size: 1rem;
       .section__content-technology {
         flex-direction: column-reverse;
       }
+
       .section__content-passion, .content__title-passion,  .content__icon-box {
         flex-basis: unset;
       }
@@ -1593,11 +1572,7 @@ font-size: 1rem;
         font-size: 9vh;
       }
 
-
-    
       .section__container {
-        /* flex-direction: column-reverse;
-        justify-content: space-around; */
         justify-content: center;
         align-items: unset;
         margin: 0;
@@ -1617,14 +1592,8 @@ font-size: 1rem;
     }
 
      .title-box {
-        /* left: auto; */
-        /* margin: 0; */
         bottom: 15%;
     }
-
-    /* .section__contact .title-box {
-        margin-left: 8%;
-    } */
 } 
 
 @media (max-width: 680px) {
@@ -1660,7 +1629,6 @@ font-size: 1rem;
       }
     .header__title-h1 {
       font-size: 5.2rem;
-       /* font-size: 16px; */
       }
 } 
 
@@ -1675,18 +1643,10 @@ font-size: 1rem;
        left: 10%;
     }
 
-    .header__moon-container {
-      
-    }
-
-    .header__title {
-
-       
-      }
     .header__title-h1 {
       font-size: 5.2rem;
-       /* font-size: 16px; */
       }
+
       .header__title-h3 .wannabe {
         font-size: 2rem;
       }
