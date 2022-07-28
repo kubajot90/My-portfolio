@@ -1035,16 +1035,12 @@ letter-spacing: .1rem;
 }
 
 .content__who-image-box {
-    /* height: 100%; */
     width: 100%;
-    /* height: 330px; */
     height: 21rem;
     margin-top: 5%;
-    background-image: url(/image/Walesa.jpg);
-    /* background-position:center; */
+    background-image: url(/image/Ja.jpg);
     background-size: cover;
-    /* box-shadow: 0 0 40px rgba(0, 0, 0, 0.067); */
-
+    /* background-position: 20% 0; */
 }
 
 .content__about-me-passion {
@@ -1053,7 +1049,6 @@ letter-spacing: .1rem;
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
-    /* padding: 0 15%; */
     padding: 12rem 15% 0 15%;
 }
 
@@ -1544,7 +1539,7 @@ font-size: 1rem;
         left: -14%;
     }
 
-      .content__about-me-who, .content__about-me-passion, .content__projects-header, .content__projects-description {
+      .content__about-me-who, .content__about-me-passion, .content__projects-header, .content__projects-description, .technology__item {
         flex-direction: column;
       }
 
@@ -1562,6 +1557,11 @@ font-size: 1rem;
 
       .technology__list {
         margin: 0;
+      }
+
+      .technology__p {
+        margin-left: 0;
+        margin-top: 1.8rem;
       }
 
       .fa-mobile-screen-button, .fa-envelope {
@@ -1593,6 +1593,24 @@ font-size: 1rem;
 
      .title-box {
         bottom: 15%;
+    }
+
+    .title__description-box {
+        font-size: 1.2rem;
+    }
+
+    .title__button {
+        padding: .9rem 1.5rem;
+        font-size: 2rem;
+    }
+    
+    .scroll__box {
+        bottom: 20%;
+        left: -7%;
+    }
+
+    .scroll__text{
+        font-size: 2rem;
     }
 } 
 
@@ -1630,6 +1648,11 @@ font-size: 1rem;
     .header__title-h1 {
       font-size: 5.2rem;
       }
+
+    .scroll__box {
+        bottom: 20%;
+        left: 68%;
+    }
 } 
 
 @media (max-width: 370px){

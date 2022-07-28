@@ -8,6 +8,7 @@ export class Scroll extends Common {
     this.currentSectionIndex = 0;
     this.isScroll = false;
     this.isWheel = false;
+    this.wheelDelta = null;
 
     this.touchStart = 0;
     this.touchPosition = null;
@@ -38,9 +39,8 @@ export class Scroll extends Common {
 
   addListeners() {
     document.addEventListener("wheel", (e) => {
-      console.log("wheel");
       if (!this.isScroll) {
-        this.checkIsScroll();
+        this.wheelDelta = e.wheelDelta;
         if (!this.blockScroll()) {
           this.isWheel = true;
           this.setCurrentSectionIndex(e);
@@ -66,11 +66,11 @@ export class Scroll extends Common {
     document.addEventListener(
       "touchmove",
       (e) => {
+        console.log("touchmove");
         this.touchPosition = e.touches[0].clientY;
         e.preventDefault();
         this.scrollSectionByTouch();
         if (!this.isScroll) {
-          this.checkIsScroll();
           if (!this.blockScroll()) {
             this.checkTouch(e);
           }
@@ -95,6 +95,7 @@ export class Scroll extends Common {
       });
     });
   }
+
   resetDistance() {
     const observer = new MutationObserver(() => {
       this.distance = 0;
@@ -135,7 +136,7 @@ export class Scroll extends Common {
     const lengthOfSections = document.querySelectorAll(".section").length;
 
     this.isWheel
-      ? (this.scrollDirection = e.wheelDelta)
+      ? (this.scrollDirection = this.wheelDelta)
       : (this.scrollDirection = this.scrollDirection);
 
     this.scrollDirection > 0
@@ -154,6 +155,7 @@ export class Scroll extends Common {
 
     this.sectionsAnimations();
     this.homePageAnimation();
+    this.checkIsScroll();
   }
 
   checkIsScroll() {
@@ -175,12 +177,16 @@ export class Scroll extends Common {
 
   checkTouch(e) {
     const touchPosition = e.touches[0].clientY;
+    const touchDistance = this.touchStart - touchPosition;
 
-    this.touchStart - touchPosition > 0
-      ? (this.scrollDirection = -1)
-      : (this.scrollDirection = 1);
+    if (touchDistance > 5) {
+      this.scrollDirection = -1;
+      this.setCurrentSectionIndex(e);
+    } else if (touchDistance < -5) {
+      this.scrollDirection = 1;
+      this.setCurrentSectionIndex(e);
+    }
 
-    this.setCurrentSectionIndex(e);
     this.scrollDirection = 0;
     this.isTouch = false;
   }

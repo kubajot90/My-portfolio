@@ -99,6 +99,7 @@ export class ShowSection extends Common {
     this.arrowAnimationHide();
     this.sectionContentHide();
     this.isSectionNumberSlow = false;
+    this.changeNavColor(e);
   }
 
   arrowClickActions() {
@@ -157,6 +158,11 @@ export class ShowSection extends Common {
           behavior: "smooth",
         });
       });
+      backButton.addEventListener("touchstart", () => {
+        this.sections[this.currentSectionIndex].scrollIntoView({
+          behavior: "smooth",
+        });
+      });
     }
   }
 
@@ -181,7 +187,7 @@ export class ShowSection extends Common {
 
     this.main.classList.toggle("main--section-expand");
     sectionContainer.classList.toggle("section__container--section-expand");
-    console.log(window.innerWidth);
+
     window.innerWidth > 768
       ? imageBox.classList.toggle("image-box--section-expand")
       : imageBox.classList.toggle("image-box--section-expand-mobile");
@@ -275,8 +281,10 @@ export class ShowSection extends Common {
     } else {
       if (!e[0].isIntersecting) {
         this.setNavColor("black");
+        this.scrollIconAnimationHide();
       } else {
         this.setNavColor("white");
+        this.scrollIconAnimationShow();
       }
     }
   }
