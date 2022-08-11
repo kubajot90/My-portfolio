@@ -4,7 +4,6 @@ import { Common } from "./Common.js";
 export class Scroll extends Common {
   constructor() {
     super();
-    // this.sections = null;
     this.currentSectionIndex = 0;
     this.isScroll = false;
     this.isWheel = false;
@@ -21,13 +20,6 @@ export class Scroll extends Common {
 
     this.sectionContainer = null;
 
-    // this.headerTitles = null;
-    // this.clouds = null;
-
-    // this.main = null;
-
-    // this.navItems = null;
-
     this.changeUrl = new ChangeUrl();
   }
 
@@ -38,12 +30,12 @@ export class Scroll extends Common {
   }
 
   addListeners() {
-    document.addEventListener("wheel", (e) => {
+    window.addEventListener("wheel", (e) => {
       if (!this.isScroll) {
         this.wheelDelta = e.wheelDelta;
         if (!this.blockScroll()) {
           this.isWheel = true;
-          this.setCurrentSectionIndex(e);
+          this.setCurrentSectionIndex();
           this.isWheel = false;
         }
       }
@@ -52,7 +44,6 @@ export class Scroll extends Common {
     document.addEventListener(
       "touchstart",
       (e) => {
-        console.log("touchstart");
         this.lastDistance = this.distance;
         this.touchStart = e.touches[0].clientY;
         if (!this.blockScroll()) {
@@ -66,7 +57,6 @@ export class Scroll extends Common {
     document.addEventListener(
       "touchmove",
       (e) => {
-        console.log("touchmove");
         this.touchPosition = e.touches[0].clientY;
         e.preventDefault();
         this.scrollSectionByTouch();
@@ -80,7 +70,6 @@ export class Scroll extends Common {
     );
 
     window.addEventListener("hashchange", () => {
-      console.log("hashchange");
       this.changeCurrentSectionIndexByNav();
       this.homePageAnimation();
       this.sectionsAnimations();
@@ -94,6 +83,8 @@ export class Scroll extends Common {
         this.navItemsClickActions(item);
       });
     });
+
+    document.addEventListener("keydown", (e) => this.scrollSectionByKeys(e));
   }
 
   resetDistance() {
@@ -101,6 +92,17 @@ export class Scroll extends Common {
       this.distance = 0;
     });
     observer.observe(this.sectionContainer, { attributes: true });
+  }
+
+  scrollSectionByKeys(e) {
+    if (!this.isScroll) {
+      if (e.code === "ArrowRight" || e.code === "ArrowDown") {
+        this.scrollDirection = -1;
+      } else if (e.code === "ArrowUp" || e.code === "ArrowLeft") {
+        this.scrollDirection = 1;
+      }
+      this.setCurrentSectionIndex();
+    }
   }
 
   scrollSectionByTouch() {
@@ -132,7 +134,7 @@ export class Scroll extends Common {
     this.sections[this.currentSectionIndex].scrollIntoView();
   }
 
-  setCurrentSectionIndex(e) {
+  setCurrentSectionIndex() {
     const lengthOfSections = document.querySelectorAll(".section").length;
 
     this.isWheel
@@ -181,10 +183,10 @@ export class Scroll extends Common {
 
     if (touchDistance > 5) {
       this.scrollDirection = -1;
-      this.setCurrentSectionIndex(e);
+      this.setCurrentSectionIndex();
     } else if (touchDistance < -5) {
       this.scrollDirection = 1;
-      this.setCurrentSectionIndex(e);
+      this.setCurrentSectionIndex();
     }
 
     this.scrollDirection = 0;
