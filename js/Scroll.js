@@ -116,7 +116,7 @@ export class Scroll extends Common {
         this.lastDistance + (this.touchStart - this.touchPosition);
       document
         .querySelector(".main--section-expand")
-        .scrollTo(0, this.distance * 1.9);
+        .scrollTo(0, this.distance * 2.5);
       this.resetDistance();
     }
   }
